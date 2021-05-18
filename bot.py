@@ -92,7 +92,15 @@ async def datenschutz(ctx):
 
         await ctx.send(embed=datenschutz)
 
+#SHUTDOWN FOR THE BOT (ONLY OWNER CAN DO SO)
+@client.command()
+@commands.is_owner()
+async def shutdown(ctx):
+    await ctx.bot.logout()
+
+
+
 # RUN BOT
 if __name__ == '__main__':
     import config
-    client.run(config.token)
+    client.run(config.Token)
