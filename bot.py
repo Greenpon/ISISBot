@@ -93,4 +93,5 @@ async def datenschutz(ctx):
         await ctx.send(embed=datenschutz)
 
 # RUN BOT
-client.run('ODM5MTA0Njc5MTE4ODk3MjEz.YJEzIQ.YFR24GVkJ7ddtlj4rDX3Z4u-eNM')
+if __name__ == '__main__':
+    client.run('ODM5MTA0Njc5MTE4ODk3MjEz.YJEzIQ.YFR24GVkJ7ddtlj4rDX3Z4u-eNM')
