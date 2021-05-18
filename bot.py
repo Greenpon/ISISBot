@@ -94,4 +94,5 @@ async def datenschutz(ctx):
 
 # RUN BOT
 if __name__ == '__main__':
-    client.run()
+    import config
+    client.run(config.token)
