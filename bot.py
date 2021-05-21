@@ -11,9 +11,11 @@ today = date.today()
 d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
 
+# EXTENSIONS
+extensions = ["Befehle", "Filtering"]
+
 # INIT BOT
 client = commands.Bot(command_prefix='!')
-
 
 # PRESENCE & BOOT CONF.
 @client.event
@@ -96,11 +98,17 @@ async def datenschutz(ctx):
 @client.command()
 @commands.is_owner()
 async def shutdown(ctx):
-    await ctx.bot.logout()
+    await ctx.client.logout()
 
 
 
 # RUN BOT
 if __name__ == '__main__':
+    for extension in extensions:
+        try:
+            client.load_extension(extension)
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format(extension, exc))
     import config
     client.run(config.Token)
