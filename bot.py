@@ -98,7 +98,8 @@ async def datenschutz(ctx):
 @client.command()
 @commands.is_owner()
 async def shutdown(ctx):
-    await ctx.client.logout()
+    await client.close()
+    print("Bot Closed")
 
 
 

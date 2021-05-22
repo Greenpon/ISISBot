@@ -2,6 +2,15 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 22-05 Sven
+- Fixed shutdown in bot.py finally (it just takes a few seconds)
+- Fixed Filtering.py
+    Added Key/Value pairs
+    Error exceptions
+    Case handling
+    Whitelisting and Blacklisting works now.
+
+
 Changelog 21-05 Sven
 - Fixed shutdown in bot.py
 - Added extensions to bot.py
