@@ -19,7 +19,7 @@ class Befehle(commands.Cog):
                 hilfe = discord.Embed(title="Befehle", color=0x990000)
                 hilfe.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 hilfe.add_field(name="Hier sind alle Befehle die ich kenne:",
-                                value="kommt noch :)",
+                                value="Kommt noch :)",
                                 inline=False)
                 hilfe.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 

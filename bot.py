@@ -81,7 +81,7 @@ async def notif(ctx):
 
         await ctx.send(embed=test_notif)
 
-
+# DATENSCHUTZ DISCLAIMER
 @client.command()
 async def datenschutz(ctx):
 
@@ -103,7 +103,7 @@ async def shutdown(ctx):
 
 
 
-# RUN BOT
+# RUN BOT AND LOAD EXTENSIONS
 if __name__ == '__main__':
     for extension in extensions:
         try:

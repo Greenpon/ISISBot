@@ -162,19 +162,31 @@ class Filtering(commands.Cog):
                 if ctx.author.id not in pairs:
                     pairs[ctx.author.id] = len(wlist)
 
-                wlist.append([])
-                blist.append([])
+                    wlist.append([])
+                    blist.append([])
 
-                create = discord.Embed(title="Whitelist und Blacklist", color=0x990000)
-                create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                create.add_field(name="Es wurde eine Whitelist und Blacklist erstellt.",
-                                 value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
-                                       "hinzufügen. Außerdem kannst du mit !remove_b und remove_w Sachen entfernen. "
-                                       "Beispiel: !add_b Test",
-                                    inline=False)
-                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    create = discord.Embed(title="Whitelist und Blacklist", color=0x990000)
+                    create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                    create.add_field(name="Es wurde eine Whitelist und Blacklist erstellt",
+                                     value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
+                                           "hinzufügen. Außerdem kannst du mit !remove_w und remove_b Sachen entfernen. "
+                                           "Beispiel: !add_w Test",
+                                        inline=False)
+                    create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=create)
+                    await ctx.send(embed=create)
+
+                else:
+                    create = discord.Embed(title="Whitelist und Blacklist", color=0x990000)
+                    create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                    create.add_field(name="Du besitzt bereits eine Whitelist und Blacklist",
+                                     value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
+                                           "hinzufügen. Außerdem kannst du mit !remove_w und remove_b Sachen entfernen. "
+                                           "Beispiel: !add_w Test",
+                                     inline=False)
+                    create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                    await ctx.send(embed=create)
 
 
 
