@@ -81,7 +81,7 @@ async def notif(ctx):
 
         await ctx.send(embed=test_notif)
 
-# DATENSCHUTZ DISCLAIMER
+#DATENSCHUTZ DISCLAIMER
 @client.command()
 async def datenschutz(ctx):
 

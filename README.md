@@ -9,7 +9,7 @@ Changelog 22-05 Sven
     - Error exceptions
     - Case handling
     - Whitelisting and Blacklisting works now.
-- Added some comments to the code    
+- Added some comments to the code
 
 
 Changelog 21-05 Sven

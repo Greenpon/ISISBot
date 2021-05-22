@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from datetime import date
 
-# DATE DEF
+#DATE DEF
 today = date.today()
 d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
