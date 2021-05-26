@@ -15,7 +15,7 @@ d2 = today.strftime("%d/%m/%y")
 extensions = ["Befehle", "Filtering"]
 
 # INIT BOT
-client = commands.Bot(command_prefix='!')
+client = commands.Bot(command_prefix='!', help_command=None)
 
 # PRESENCE & BOOT CONF.
 @client.event

@@ -13,9 +13,9 @@ class Befehle(commands.Cog):
         self.client = client
 
         # Create a Help-Command which shows all available commands
-        # reacts to !helpme, !command and !commands
+        # reacts to !helpme, !help, !command and !commands
         # Author: Sven
-        @client.command(aliases=["command", "commands"])
+        @client.command(aliases=["help", "command", "commands"])
         async def helpme(ctx):
             if ctx.channel.name == "bot-test":
                 hilfe = discord.Embed(title="Befehle", color=0x990000)
