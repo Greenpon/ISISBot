@@ -2,6 +2,15 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 26-05 Sven
+- Added keywords
+- Changed the Show command
+- Added aliases for
+  - Befehle.py helpme
+  - Filtering.py show
+- Commenting in Befehle.py and Filtering.py
+
+
 Changelog 22-05 Sven
 - Fixed shutdown in bot.py finally (it just takes a few seconds)
 - Fixed Filtering.py:

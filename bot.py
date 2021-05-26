@@ -72,11 +72,14 @@ async def notif(ctx):
         unsubscribe = "[*Forum abbestellen*](https://isis.tu-berlin.de/login/index.php)"
 
         test_notif = discord.Embed(color=0x990000)
-        test_notif.set_author(name=f"Benachrichtigungen für {ctx.author.display_name}"+" vom " + d1, icon_url=ctx.author.avatar_url)
+        test_notif.set_author(name=f"Benachrichtigungen für {ctx.author.display_name}" + " vom " + d1,
+                              icon_url=ctx.author.avatar_url)
         test_notif.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-        test_notif.add_field(name=modul_1+" ➔ "+forum_1, value=nachricht_1+"\n"+unsubscribe, inline=False)
-        test_notif.add_field(name=modul_2+" ➔ "+forum_2, value=nachricht_2+"\n"+unsubscribe, inline=False)
-        test_notif.add_field(name=modul_3+" ➔ "+forum_3, value=nachricht_3+"\n"+unsubscribe, inline=False)
+        test_notif.add_field(name=modul_1 + " ➔ " + forum_1, value=nachricht_1 + "\n" + unsubscribe, inline=False)
+        test_notif.add_field(name=modul_2 + " ➔ " + forum_2, value=nachricht_2 + "\n" + unsubscribe, inline=False)
+        test_notif.add_field(name=modul_3 + " ➔ " + forum_3, value=nachricht_3 + "\n" + unsubscribe, inline=False)
+        test_notif.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
         test_notif.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
         await ctx.send(embed=test_notif)
