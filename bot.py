@@ -3,7 +3,6 @@
 import discord
 from discord.ext import commands
 from datetime import date
-import feedparser
 import random
 
 # DATE DEF
@@ -23,6 +22,18 @@ async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='ISIS'))
     print(f"{client.user} is running :)")
 
+# ERROR HANDLING (COMMAND DOES NOT EXIST)
+@client.event
+async def on_command_error(ctx, error):
+    if ctx.channel.name == "bot-test":
+        if isinstance(error, commands.CommandNotFound):
+
+            errormsg = discord.Embed(title="", color=0x990000)
+            errormsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+            errormsg.add_field(name="Achtung!", value="Diesen Befehl kenne ich nicht. \nSchau dir meine Befehle mit !help an.", inline=False)
+            errormsg.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+            await ctx.send(embed=errormsg)
 
 # NOTIF TEST COMMAND (random content)
 @client.command()

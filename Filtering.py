@@ -153,9 +153,9 @@ class Filtering(commands.Cog):
         async def add_k(ctx, message):
             if ctx.channel.name == "bot-test":
                 if ctx.author.id in pairs:
-                    blist[pairs.get(ctx.author.id)].append(message)
+                    klist[pairs.get(ctx.author.id)].append(message)
 
-                    keyword = discord.Embed(title="Whitelist", color=0x990000)
+                    keyword = discord.Embed(title="Keywords", color=0x990000)
                     keyword.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                     keyword.add_field(name="Du hast folgende Keywords gesetzt:",
                                         value=klist[pairs.get(ctx.author.id)],
@@ -186,11 +186,11 @@ class Filtering(commands.Cog):
             if ctx.channel.name == "bot-test":
                 if ctx.author.id in pairs:
                     try:
-                        blist[pairs.get(ctx.author.id)].remove(message)
+                        klist[pairs.get(ctx.author.id)].remove(message)
                     except ValueError:
                         pass
 
-                    keyword = discord.Embed(title="Whitelist", color=0x990000)
+                    keyword = discord.Embed(title="Keywords", color=0x990000)
                     keyword.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                     keyword.add_field(name="Du hast folgende Keywords gesetzt:",
                                         value=klist[pairs.get(ctx.author.id)],
@@ -221,7 +221,7 @@ class Filtering(commands.Cog):
         async def show(ctx):
             if ctx.channel.name == "bot-test":
                 if ctx.author.id in pairs:
-                    current = discord.Embed(title="Whitelist und Blacklist", color=0x990000)
+                    current = discord.Embed(title="Filterlisten", color=0x990000)
                     current.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
 
                     if ctx == "show_w":
@@ -280,7 +280,7 @@ class Filtering(commands.Cog):
                     blist.append([])
                     klist.append([])
 
-                    create = discord.Embed(title="Whitelist und Blacklist", color=0x990000)
+                    create = discord.Embed(title="Filterlisten", color=0x990000)
                     create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                     create.add_field(name="Es wurden Filterlisten erstellt",
                                      value="Mit !add_w Sachen zur Whitelist hinzufügen. "
@@ -293,7 +293,7 @@ class Filtering(commands.Cog):
                     await ctx.send(embed=create)
 
                 else:
-                    create = discord.Embed(title="Whitelist und Blacklist", color=0x990000)
+                    create = discord.Embed(title="Filterlisten", color=0x990000)
                     create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                     create.add_field(name="Du besitzt bereits Filterlisten",
                                      value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
