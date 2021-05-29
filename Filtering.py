@@ -224,15 +224,15 @@ class Filtering(commands.Cog):
                     current = discord.Embed(title="Filterlisten", color=0x990000)
                     current.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
 
-                    if ctx == "show_w":
+                    if ctx.invoked_with.lower() == "show_w":
                         current.add_field(name="Die Whitelist enthällt aktuell:",
                                           value=wlist[pairs.get(ctx.author.id)],
                                           inline=False)
-                    elif ctx == "show_b":
+                    elif ctx.invoked_with.lower() == "show_b":
                         current.add_field(name="Die Blacklist enthällt aktuell:",
                                           value=blist[pairs.get(ctx.author.id)],
                                           inline=False)
-                    elif ctx == "show_k":
+                    elif ctx.invoked_with.lower() == "show_k":
                         current.add_field(name="Du hast folgende Keywords gesetzt:",
                                           value=klist[pairs.get(ctx.author.id)],
                                           inline=False)
