@@ -2,10 +2,16 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 31-05 Lennart
+- Added ShowForum.py
+  - still WIP
+  - reads ISIS-Bot Modul Ankündigungs Forum and shows title, author and message in discord server
+- adjusted extensions in bot.py with new ShowForum
+
 Changelog 28-05 Sven
 - Added an Error handling function in bot.py
 - Changed some output in Filtering.py
-- Imported cofig.py to rss.py 
+- Imported cofig.py to rss.py
   - RSS-key can now be stored in config.py
 
 Changelog 26-05 Sven
