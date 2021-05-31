@@ -20,9 +20,11 @@ class Befehle(commands.Cog):
             if ctx.channel.name == "bot-test":
                 hilfe = discord.Embed(title="Befehle", color=0x990000)
                 hilfe.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                hilfe.add_field(name="Hier sind alle Befehle die ich kenne:",
-                                value="Kommt noch :)",
-                                inline=False)
+                hilfe.add_field(name="!create", value="Erstelle Whitelist- Blacklist- und Keywords-listen", inline=False)
+                hilfe.add_field(name="!add_w / !remove_w", value="Eintrag der Whitelist hinzufügen/entfernen", inline=False)
+                hilfe.add_field(name="!add_b / !remove_b", value="Eintrag der Whitelist hinzufügen/entfernen", inline=False)
+                hilfe.add_field(name="!add_k / !remove_k", value="Keywords hinzufügen/entfernen", inline=False)
+                hilfe.add_field(name="!show / !show_w / !show_b / !show_k", value="Siehe derzeitige Listen ein ", inline=False)
                 hilfe.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=hilfe)
