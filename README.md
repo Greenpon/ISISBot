@@ -2,6 +2,10 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 03-06 Lennart
+- changed forum_output to store key value pairs instead of arrays 
+- updated comments in ShowForum
+
 Changelog 31-05 Lennart
 - Added ShowForum.py
   - still WIP
