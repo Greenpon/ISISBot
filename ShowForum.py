@@ -1,4 +1,3 @@
-from typing import List
 import feedparser
 import config
 import discord
@@ -15,7 +14,7 @@ d2 = today.strftime("%d/%m/%y")
 
 # %%
 
-# some code from stack overflow to be able to strip html tags and only get the needed values insede
+# strip html tags and only get the needed values inside
 class MLStripper(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -39,7 +38,6 @@ def strip_tags(html):
 
 # %%
 
-
 class ShowForum(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -48,7 +46,6 @@ class ShowForum(commands.Cog):
         # list all topics and their messages in discord embed
         # reacts to !show_forum
         # Author: Lennart
-        # note: The implementation of the forum_output array should be changed to a key/value pair object (oder wie man das auch nennt)
         @client.command()
         async def show_forum(ctx):
             if ctx.channel.name == "bot-test":
@@ -61,20 +58,16 @@ class ShowForum(commands.Cog):
 
                 entries = feed['entries']
 
-                # forum_output is list of Strings, that contain title, Author and message
+                # forum_output is list of key/value pairs that contain title and message
                 forum_output = []
-
-                # has to be changed to key/value pairs, I was to lazy to do that
                 for i in entries:
-                    title = i['title']
-                    author = strip_tags(i.summary).replace(u'\xa0', u'').split(".")[0]
-                    message = strip_tags(i.summary).replace(u'\xa0', u'').split(".")[1]
-                    forum_output.append([title, author, message])
+                    temp = {'title': i['title'], 'message': strip_tags(i.summary).replace(u'\xa0', u'').split(".")[1]}
+                    forum_output.append(temp)
 
                 forum_embed = discord.Embed(title="Alles aus diesem Forum", color=0x990000)
                 forum_embed.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 for j in forum_output:
-                    forum_embed.add_field(name=j[0], value=j[1] + "\n" + "```" + j[2] + "```", inline=False)
+                    forum_embed.add_field(name=j.get('title'), value="```" + j.get('message') + "```", inline=False)
                 forum_embed.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=forum_embed)
