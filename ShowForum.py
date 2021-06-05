@@ -5,6 +5,8 @@ from discord.ext import commands
 from datetime import date
 from io import StringIO
 from html.parser import HTMLParser
+import rss
+import Filtering
 
 # DATE DEF
 today = date.today()
@@ -42,35 +44,83 @@ class ShowForum(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-        # reads all ISIS-Bot Ankündigungen Forum
-        # list all topics and their messages in discord embed
-        # reacts to !show_forum
-        # Author: Lennart
+
+        # listens to the rss-feed and refreshes it permanently
+        # posts new entries from the rss-feed after receiving them
+        # @initial startup wont post entries from the past
+        # posts one notification for each user in the Filtering-Lists
+        # checks the blacklist and keywords. If the post contains anything from the blacklist it will not be posted
+        # If the post contains anything from the keyword list the text will be bold and in a different colour
+        # Author: Sven & Lennart
         @client.command()
-        async def show_forum(ctx):
+        async def listen(ctx):
             if ctx.channel.name == "bot-test":
 
-                # The personal key of the moodle User has (for now) be added to the RSS-URL
-                # (insert yours for the URL to work)
-                personal_key = config.key
-                feed = feedparser.parse(
-                    f'https://isis.tu-berlin.de/rss/file.php/1970720/{personal_key}/mod_forum/64807/rss.xml')
+                IDsUsed = []
 
-                entries = feed['entries']
+                feed = rss.refreshFeed()
+                feed.reverse()
 
-                # forum_output is list of key/value pairs that contain title and message
-                forum_output = []
-                for i in entries:
-                    temp = {'title': i['title'], 'message': strip_tags(i.summary).replace(u'\xa0', u'').split(".")[1]}
-                    forum_output.append(temp)
+                while (True):
 
-                forum_embed = discord.Embed(title="Alles aus diesem Forum", color=0x990000)
-                forum_embed.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                for j in forum_output:
-                    forum_embed.add_field(name=j.get('title'), value="```" + j.get('message') + "```", inline=False)
-                forum_embed.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    for entry_in_feed in feed:
+                        if entry_in_feed.id in IDsUsed:
+                            continue
+                        else:
+                            IDsUsed.append(entry_in_feed.id)
+                            if entry_in_feed.published_parsed.tm_year < today.year or \
+                                    (entry_in_feed.published_parsed.tm_year == today.year and entry_in_feed.published_parsed.tm_mon < today.month) or \
+                                     (entry_in_feed.published_parsed.tm_mon == today.month and entry_in_feed.published_parsed.tm_mday < today.day):
+                                continue
+                            else:
 
-                await ctx.send(embed=forum_embed)
+                                users = Filtering.users()
+                                for user in users:
+                                    author = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[0]
+                                    message = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[1]
+
+                                    pairs = Filtering.getPairs()
+                                    blist = Filtering.getBlacklist()
+
+                                    post = True
+
+                                    for x in blist[pairs.get(user)]:
+                                        if x in entry_in_feed.title or x in author or x in message:
+                                            post = False
+
+                                    if post:
+                                        klist = Filtering.getKeywordlist()
+
+                                        mark = False
+
+                                        for x in klist[pairs.get(user)]:
+                                            if x in entry_in_feed.title or x in author or x in message:
+                                                mark = True
+
+                                        if mark:
+                                            await ctx.send("Neue Benachrichtigung für <@{}>".format(user))
+                                            noti = discord.Embed(color=0x990000)
+                                            noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                                            noti.add_field(name=entry_in_feed.title + " " + author,
+                                                           value="```yaml\n**" + message + "**```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
+                                                               entry_in_feed.link), inline=False)
+                                            noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                                            await ctx.send(embed=noti)
+
+                                        else:
+                                            await ctx.send("Neue Benachrichtigung für <@{}>".format(user))
+                                            noti = discord.Embed(color=0x990000)
+                                            noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                                            noti.add_field(name=entry_in_feed.title + " " + author,
+                                                            value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(entry_in_feed.link), inline=False)
+                                            noti.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                                            await ctx.send(embed=noti)
+
+                    await asyncio.sleep(10)
+                    feed = rss.refreshFeed()
 
 
 def setup(client):

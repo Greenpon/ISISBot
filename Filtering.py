@@ -7,13 +7,35 @@ today = date.today()
 d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
 
+# Each user id gets added into this list in the create section
+user = []
+# Simple function to return all user ids in a list
+def users():
+    return user
+
+# Create a whitelist
+wlist = []
+def getWhitelist():
+    return wlist
+
+# Create a blacklist
+blist = []
+def getBlacklist():
+    return blist
+
+# Create a Keywordlist
+klist = []
+def getKeywordlist():
+    return klist
+
+# Create a space for key value pairs
+pairs = {}
+def getPairs():
+    return pairs
 
 class Filtering(commands.Cog):
     def __init__(self, client):
         self.client = client
-
-        # Create a whitelist
-        wlist = []
 
         # Add Function for whitelists
         # reacts to !add_w 'Test' and adds Test to the whitelist
@@ -77,9 +99,6 @@ class Filtering(commands.Cog):
 
                     await ctx.send(embed=createfirst)
 
-        # Create a blacklist
-        blist = []
-
         # Add Function for blacklists
         # reacts to !add_b 'Test' and adds Test to the blacklist
         # checks if the user already has a blacklist
@@ -141,9 +160,6 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.send(embed=createfirst)
-
-        # Create a Keywordlist
-        klist = []
 
         # Add Function for Keywords
         # reacts to !add_k 'Test' and adds Test to Keywords
@@ -261,10 +277,6 @@ class Filtering(commands.Cog):
 
                     await ctx.send(embed=createfirst)
 
-
-        # Create a space for key value pairs
-        pairs = {}
-
         # Creates the lists for Whitelist, Blacklist and Keywords
         # Gives the user a key-value pair so each user has own lists
         # reacts to !create
@@ -275,6 +287,7 @@ class Filtering(commands.Cog):
             if ctx.channel.name == "bot-test":
                 if ctx.author.id not in pairs:
                     pairs[ctx.author.id] = len(wlist)
+                    user.append(ctx.author.id)
 
                     wlist.append([])
                     blist.append([])
@@ -303,8 +316,6 @@ class Filtering(commands.Cog):
                     create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.send(embed=create)
-
-
 
 def setup(client):
     client.add_cog(Filtering(client))

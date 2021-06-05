@@ -2,6 +2,14 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 05-05 Sven & Lennart
+- Optimized rss.py
+- Outsourced the lists and key-value pairs from Filtering.py to access them from ShowForum.py
+- Implemented **listen** in ShowForum.py
+  - Implemented working blacklist
+  - Implemented working keywords
+  - Added a Notification for each user who uses the bot
+
 Changelog 03-06 Lennart
 - changed forum_output to store key value pairs instead of arrays 
 - updated comments in ShowForum
