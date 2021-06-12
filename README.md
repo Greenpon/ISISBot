@@ -2,7 +2,19 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
-Changelog 05-05 Sven & Lennart
+Changelog 12-06 Sven
+- Added a startup command which automatically triggers the Datenschutz
+- Modified the Datenschutz
+- Added a check for Reactions in Filtering.py
+- Added Reaction based Filterlists creation
+  - Still WIP (maybe need to change the ID which it checks)
+- Still to do:
+  - Check the embed texts in Filtering.py and maybe change them
+  - automatically start the listen function if atleast one user accepts the Datenschutz
+  - automatically check if still one user accepts the Datenschutz else not listen anymore
+  - Small changes to the checking of the reactions in Filtering.py (ID-based stuff)
+
+Changelog 05-06 Sven & Lennart
 - Optimized rss.py
 - Outsourced the lists and key-value pairs from Filtering.py to access them from ShowForum.py
 - Implemented **listen** in ShowForum.py

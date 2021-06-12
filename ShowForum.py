@@ -62,6 +62,7 @@ class ShowForum(commands.Cog):
                 feed = rss.refreshFeed()
                 feed.reverse()
 
+
                 while (True):
 
                     for entry_in_feed in feed:

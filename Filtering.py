@@ -1,11 +1,16 @@
 import discord
 from discord.ext import commands
-from datetime import date
+import bot
 
-#DATE DEF
-today = date.today()
-d1 = today.strftime("%d/%m")
-d2 = today.strftime("%d/%m/%y")
+#Import from bot
+import config
+
+today = bot.today
+d1 = bot.d1
+d2 = bot.d2
+
+# Storing the channel id
+channel_id = []
 
 # Each user id gets added into this list in the create section
 user = []
@@ -277,45 +282,109 @@ class Filtering(commands.Cog):
 
                     await ctx.send(embed=createfirst)
 
+        # waits for Reacts to the Datenschutz message
+        # Maybe still have to implement the id of the Datenschutz message(It only tracks the channel atm)
+        # CREATE USER LISTS AFTER REACTING
+        # If its the initial post it will also set the channel id
+        # It also removes the reaction after creating or removing the user
+        # Author Sven
+        @client.event
+        async def on_raw_reaction_add(payload):
+            if not channel_id:
+                channel_id.append(payload.channel_id)
+            if payload.user_id not in config.Bot_Id:
+                if payload.channel_id == channel_id[0]:
+                    if payload.emoji.name == '✅':
+                        await create(payload.user_id)
+                        channel = client.get_channel(payload.channel_id)
+                        message = await channel.fetch_message(payload.message_id)
+                        await message.remove_reaction(payload.emoji, payload.member)
+                    elif payload.emoji.name == '❌':
+                        await remove(payload.user_id)
+                        channel = client.get_channel(payload.channel_id)
+                        message = await channel.fetch_message(payload.message_id)
+                        await message.remove_reaction(payload.emoji, payload.member)
+
+
         # Creates the lists for Whitelist, Blacklist and Keywords
         # Gives the user a key-value pair so each user has own lists
-        # reacts to !create
         # checks if the user already has lists
         # Author: Sven
-        @client.command()
-        async def create(ctx):
-            if ctx.channel.name == "bot-test":
-                if ctx.author.id not in pairs:
-                    pairs[ctx.author.id] = len(wlist)
-                    user.append(ctx.author.id)
+        async def create(id):
+            ctx = client.get_channel(channel_id[0])
+            if id not in pairs:
+                pairs[id] = len(wlist)
+                user.append(id)
 
-                    wlist.append([])
-                    blist.append([])
-                    klist.append([])
+                wlist.append([])
+                blist.append([])
+                klist.append([])
 
-                    create = discord.Embed(title="Filterlisten", color=0x990000)
-                    create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    create.add_field(name="Es wurden Filterlisten erstellt",
-                                     value="Mit !add_w Sachen zur Whitelist hinzufügen. "
-                                           "Mit !add_b Sachen zur Blacklist hinzufügen. "
-                                           "Mit !add_k Sachen zu den Keywords hinzufügen. "
-                                           "Beispiel: !add_w 'Test' fügt 'Test' zur Whitelist hinzu.",
+                create = discord.Embed(title="Filterlisten", color=0x990000)
+                create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                create.add_field(name="Du hast dem Datenschutz zugestimmt und s wurden Filterlisten erstellt",
+                                value="Mit !add_w Sachen zur Whitelist hinzufügen. "
+                                        "Mit !add_b Sachen zur Blacklist hinzufügen. "
+                                        "Mit !add_k Sachen zu den Keywords hinzufügen. "
+                                        "Beispiel: !add_w 'Test' fügt 'Test' zur Whitelist hinzu.",
                                         inline=False)
-                    create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=create)
+                await ctx.send(embed=create)
 
-                else:
-                    create = discord.Embed(title="Filterlisten", color=0x990000)
-                    create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    create.add_field(name="Du besitzt bereits Filterlisten",
-                                     value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
-                                           "hinzufügen. Außerdem kannst du mit !remove_w und remove_b Sachen entfernen. "
-                                           "Beispiel: !add_w Test",
-                                     inline=False)
-                    create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+            elif id not in user:
+                user.append(id)
 
-                    await ctx.send(embed=create)
+                create = discord.Embed(title="Filterlisten", color=0x990000)
+                create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                create.add_field(name="Du hast dem Datenschutz zugestimmt und s wurden Filterlisten erstellt",
+                                 value="Mit !add_w Sachen zur Whitelist hinzufügen. "
+                                       "Mit !add_b Sachen zur Blacklist hinzufügen. "
+                                       "Mit !add_k Sachen zu den Keywords hinzufügen. "
+                                       "Beispiel: !add_w 'Test' fügt 'Test' zur Whitelist hinzu.",
+                                 inline=False)
+                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=create)
+
+            else:
+                create = discord.Embed(title="Datenschutz", color=0x990000)
+                create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                create.add_field(name="Du hast dem Datenschutz bereits zugestimmt!",
+                                value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
+                                        "hinzufügen. Außerdem kannst du mit !remove_w und remove_b Sachen entfernen. "
+                                        "Beispiel: !add_w Test",
+                                    inline=False)
+                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=create)
+
+        # Same as create but remove
+        # Author: Sven
+        async def remove(id):
+            ctx = client.get_channel(channel_id[0])
+            if id in user:
+
+                user.remove(id)
+
+                remove = discord.Embed(title="Datenschutz", color=0x990000)
+                remove.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                remove.add_field(name="Du stimmst dem Datenschutz jetzt nicht mehr zu!",
+                                 value=" ",
+                                 inline=False)
+                remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=remove)
+
+            else:
+                remove = discord.Embed(title="Datenschutz", color=0x990000)
+                remove.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                remove.add_field(name="Du hattest dem Datenschutz nicht zugestimmt!",
+                                 value=" ",
+                                 inline=False)
+                remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=remove)
 
 def setup(client):
     client.add_cog(Filtering(client))

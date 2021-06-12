@@ -5,6 +5,7 @@ from discord.ext import commands
 from datetime import date
 import random
 
+
 # DATE DEF
 today = date.today()
 d1 = today.strftime("%d/%m")
@@ -95,18 +96,32 @@ async def notif(ctx):
 
         await ctx.send(embed=test_notif)
 
+#SETUP TO GET THE CHANNEL WHICH WILL BE USED & START THE BOT
+channel_id =[]
+@client.command(aliases=["startup", "Start", "init"])
+async def start(ctx):
+
+    channel_id.append(ctx.channel.id)
+    msg = await ctx.channel.fetch_message(ctx.message.id)
+    await msg.delete()
+    await datenschutz()
+
 #DATENSCHUTZ DISCLAIMER
-@client.command()
-async def datenschutz(ctx):
+#Also adds reactions and pins the message
+#Author: Sven
+async def datenschutz():
 
-    if ctx.channel.name == "bot-test":
+    datenschutzmsg = discord.Embed(title="", color=0x990000)
+    datenschutzmsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+    datenschutzmsg.add_field(name="Achtung!", value="Mit der Benutzung dieses Bots willigst du ein, dass deine personenbezogenen Daten von ISIS bezogen und verarbeitet werden! Bitte benutze diesen Bot nicht, wenn du damit nicht einverstanden bist.", inline=False)
+    datenschutzmsg.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-        datenschutz = discord.Embed(title="", color=0x990000)
-        datenschutz.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-        datenschutz.add_field(name="Achtung!", value="Mit der Benutzung dieses Bots willigst du ein, dass deine personenbezogenen Daten von ISIS bezogen und verarbeitet werden! Bitte benutze diesen Bot nicht, wenn du damit nicht einverstanden bist.", inline=False)
-        datenschutz.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+    channel = client.get_channel(channel_id[0])
 
-        await ctx.send(embed=datenschutz)
+    embed_datenschutz = await channel.send(embed=datenschutzmsg)
+    await embed_datenschutz.add_reaction("\U00002705")
+    await embed_datenschutz.add_reaction("\U0000274C")
+    await embed_datenschutz.pin()
 
 #SHUTDOWN FOR THE BOT (ONLY OWNER CAN DO SO)
 @client.command()
