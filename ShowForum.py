@@ -5,6 +5,8 @@ from discord.ext import commands
 from datetime import date
 from io import StringIO
 from html.parser import HTMLParser
+
+import config
 import rss
 import Filtering
 
@@ -12,9 +14,6 @@ import Filtering
 today = date.today()
 d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
-
-
-# %%
 
 # strip html tags and only get the needed values inside
 class MLStripper(HTMLParser):
@@ -36,9 +35,6 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
-
-
-# %%
 
 class ShowForum(commands.Cog):
     def __init__(self, client):
@@ -78,7 +74,7 @@ class ShowForum(commands.Cog):
                                 author = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[0]
                                 message = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[1]
 
-                                users = Filtering.users()
+                                users = Filtering.getUsers()
                                 if not users:
                                     noti = discord.Embed(color=0x990000)
                                     noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")

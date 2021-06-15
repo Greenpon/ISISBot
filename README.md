@@ -2,6 +2,13 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 15-06 Sven
+- Fixed the ID checking for the Reactions
+- implemented an on_message-function which automatically deletes user commands to keep the channel clean
+- Changed the functions in Filtering to be sent to the user than sent to the channel
+- Some editing of the text
+- minor bug fixes
+
 Changelog 12-06 Sven
 - Added a startup command which automatically triggers the Datenschutz
 - Modified the Datenschutz

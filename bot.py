@@ -1,10 +1,10 @@
 # https://discordpy.readthedocs.io/en/latest/api.html
-
+import asyncio
 import discord
 from discord.ext import commands
 from datetime import date
 import random
-
+import ShowForum
 
 # DATE DEF
 today = date.today()
@@ -26,7 +26,7 @@ async def on_ready():
 # ERROR HANDLING (COMMAND DOES NOT EXIST)
 @client.event
 async def on_command_error(ctx, error):
-    if ctx.channel.name == "bot-test":
+    if ctx.channel.id in channel_id:
         if isinstance(error, commands.CommandNotFound):
 
             errormsg = discord.Embed(title="", color=0x990000)
@@ -102,9 +102,16 @@ channel_id =[]
 async def start(ctx):
 
     channel_id.append(ctx.channel.id)
-    msg = await ctx.channel.fetch_message(ctx.message.id)
-    await msg.delete()
     await datenschutz()
+
+#REMOVES ALL COMMANDS FROM THE CHANNEL TO KEEP IT CLEAN
+@client.event
+async def on_message(message):
+    if message.content.startswith("!"):
+        await client.process_commands(message)
+        await message.delete()
+
+
 
 #DATENSCHUTZ DISCLAIMER
 #Also adds reactions and pins the message

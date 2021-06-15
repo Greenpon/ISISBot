@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import bot
+import ShowForum
 
 #Import from bot
 import config
@@ -11,11 +12,12 @@ d2 = bot.d2
 
 # Storing the channel id
 channel_id = []
+post_id = []
 
 # Each user id gets added into this list in the create section
 user = []
 # Simple function to return all user ids in a list
-def users():
+def getUsers():
     return user
 
 # Create a whitelist
@@ -48,7 +50,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command()
         async def add_w(ctx, message):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     wlist[pairs.get(ctx.author.id)].append(message)
 
@@ -59,7 +61,7 @@ class Filtering(commands.Cog):
                                         inline=False)
                     whitelist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=whitelist)
+                    await ctx.author.send(embed=whitelist)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -69,7 +71,7 @@ class Filtering(commands.Cog):
                                   inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # Remove Function for whitelists
         # reacts to !remove_w 'Test' and removes Test from the whitelist
@@ -78,7 +80,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command()
         async def remove_w(ctx, message):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     try:
                         wlist[pairs.get(ctx.author.id)].remove(message)
@@ -92,7 +94,7 @@ class Filtering(commands.Cog):
                                         inline=False)
                     whitelist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=whitelist)
+                    await ctx.author.send(embed=whitelist)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -102,7 +104,7 @@ class Filtering(commands.Cog):
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # Add Function for blacklists
         # reacts to !add_b 'Test' and adds Test to the blacklist
@@ -110,7 +112,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command()
         async def add_b(ctx, message):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     blist[pairs.get(ctx.author.id)].append(message)
 
@@ -121,7 +123,7 @@ class Filtering(commands.Cog):
                                         inline=False)
                     blacklist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=blacklist)
+                    await ctx.author.send(embed=blacklist)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -131,7 +133,7 @@ class Filtering(commands.Cog):
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # Remove Function for blacklists
         # reacts to !remove_b 'Test' and removes Test from the blacklist
@@ -140,7 +142,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command()
         async def remove_b(ctx, message):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     try:
                         blist[pairs.get(ctx.author.id)].remove(message)
@@ -154,7 +156,7 @@ class Filtering(commands.Cog):
                                         inline=False)
                     blacklist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=blacklist)
+                    await ctx.author.send(embed=blacklist)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -164,7 +166,7 @@ class Filtering(commands.Cog):
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # Add Function for Keywords
         # reacts to !add_k 'Test' and adds Test to Keywords
@@ -172,7 +174,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command()
         async def add_k(ctx, message):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     klist[pairs.get(ctx.author.id)].append(message)
 
@@ -184,7 +186,7 @@ class Filtering(commands.Cog):
                     keyword.set_footer(text="ISIS Bot v0.1 • " + d2,
                                          icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=keyword)
+                    await ctx.author.send(embed=keyword)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -195,7 +197,7 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2,
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # Remove Function for Keywords
         # reacts to !remove_k 'Test' and removes Test from the Keywords
@@ -204,7 +206,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command()
         async def remove_k(ctx, message):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     try:
                         klist[pairs.get(ctx.author.id)].remove(message)
@@ -219,7 +221,7 @@ class Filtering(commands.Cog):
                     keyword.set_footer(text="ISIS Bot v0.1 • " + d2,
                                         icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=keyword)
+                    await ctx.author.send(embed=keyword)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -230,7 +232,7 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2,
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # Shows current Filterlisten
         # reacts to !show to show all lists but also reacts to !show_w , !show_b and !show_k
@@ -240,7 +242,7 @@ class Filtering(commands.Cog):
         # Author: Sven
         @client.command(aliases=["show_w", "show_b", "show_k"])
         async def show(ctx):
-            if ctx.channel.name == "bot-test":
+            if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     current = discord.Embed(title="Filterlisten", color=0x990000)
                     current.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
@@ -270,7 +272,7 @@ class Filtering(commands.Cog):
 
                     current.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=current)
+                    await ctx.author.send(embed=current)
 
                 else:
                     createfirst = discord.Embed(title="Filterlisten", color=0x990000)
@@ -280,10 +282,10 @@ class Filtering(commands.Cog):
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await ctx.send(embed=createfirst)
+                    await ctx.author.send(embed=createfirst)
 
         # waits for Reacts to the Datenschutz message
-        # Maybe still have to implement the id of the Datenschutz message(It only tracks the channel atm)
+        # Checks if the user reacted to the right message in the right channel
         # CREATE USER LISTS AFTER REACTING
         # If its the initial post it will also set the channel id
         # It also removes the reaction after creating or removing the user
@@ -292,8 +294,10 @@ class Filtering(commands.Cog):
         async def on_raw_reaction_add(payload):
             if not channel_id:
                 channel_id.append(payload.channel_id)
+            if not post_id:
+                post_id.append(payload.message_id)
             if payload.user_id not in config.Bot_Id:
-                if payload.channel_id == channel_id[0]:
+                if payload.channel_id in channel_id and payload.message_id in post_id:
                     if payload.emoji.name == '✅':
                         await create(payload.user_id)
                         channel = client.get_channel(payload.channel_id)
@@ -311,7 +315,7 @@ class Filtering(commands.Cog):
         # checks if the user already has lists
         # Author: Sven
         async def create(id):
-            ctx = client.get_channel(channel_id[0])
+            author = await client.fetch_user(id)
             if id not in pairs:
                 pairs[id] = len(wlist)
                 user.append(id)
@@ -322,7 +326,7 @@ class Filtering(commands.Cog):
 
                 create = discord.Embed(title="Filterlisten", color=0x990000)
                 create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                create.add_field(name="Du hast dem Datenschutz zugestimmt und s wurden Filterlisten erstellt",
+                create.add_field(name="Du hast dem Datenschutz zugestimmt und es wurden Filterlisten erstellt",
                                 value="Mit !add_w Sachen zur Whitelist hinzufügen. "
                                         "Mit !add_b Sachen zur Blacklist hinzufügen. "
                                         "Mit !add_k Sachen zu den Keywords hinzufügen. "
@@ -330,14 +334,15 @@ class Filtering(commands.Cog):
                                         inline=False)
                 create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=create)
+                await author.send(embed=create)
+
 
             elif id not in user:
                 user.append(id)
 
                 create = discord.Embed(title="Filterlisten", color=0x990000)
                 create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                create.add_field(name="Du hast dem Datenschutz zugestimmt und s wurden Filterlisten erstellt",
+                create.add_field(name="Du stimmst dem Datenschutz nun wieder zu!",
                                  value="Mit !add_w Sachen zur Whitelist hinzufügen. "
                                        "Mit !add_b Sachen zur Blacklist hinzufügen. "
                                        "Mit !add_k Sachen zu den Keywords hinzufügen. "
@@ -345,7 +350,7 @@ class Filtering(commands.Cog):
                                  inline=False)
                 create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=create)
+                await author.send(embed=create)
 
             else:
                 create = discord.Embed(title="Datenschutz", color=0x990000)
@@ -357,12 +362,12 @@ class Filtering(commands.Cog):
                                     inline=False)
                 create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=create)
+                await author.send(embed=create)
 
         # Same as create but remove
         # Author: Sven
         async def remove(id):
-            ctx = client.get_channel(channel_id[0])
+            author = await client.fetch_user(id)
             if id in user:
 
                 user.remove(id)
@@ -370,21 +375,21 @@ class Filtering(commands.Cog):
                 remove = discord.Embed(title="Datenschutz", color=0x990000)
                 remove.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 remove.add_field(name="Du stimmst dem Datenschutz jetzt nicht mehr zu!",
-                                 value=" ",
+                                 value="Deine Filterlisten bleiben jedoch gespeichert, falls du dich umentscheidest.",
                                  inline=False)
                 remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=remove)
+                await author.send(embed=remove)
 
             else:
                 remove = discord.Embed(title="Datenschutz", color=0x990000)
                 remove.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 remove.add_field(name="Du hattest dem Datenschutz nicht zugestimmt!",
-                                 value=" ",
+                                 value="Es hat sich nichts geändert du kannst den Bot nicht nutzen.",
                                  inline=False)
                 remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=remove)
+                await author.send(embed=remove)
 
 def setup(client):
     client.add_cog(Filtering(client))
