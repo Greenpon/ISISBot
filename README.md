@@ -73,3 +73,7 @@ Changelog 21-05 Sven
     - This is still WIP and not tested jet (will test on 22-05)
     - Maybe the creation of lists should be changed (discord ids are 18 digits...) maybe with key/value pairs
 - Added some comments to the code  
+
+Changelog 17-06 Anna
+– Final text for data security modal that shows up after the bot got started
+
