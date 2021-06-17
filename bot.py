@@ -120,7 +120,7 @@ async def datenschutz():
 
     datenschutzmsg = discord.Embed(title="", color=0x990000)
     datenschutzmsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-    datenschutzmsg.add_field(name="Achtung!", value="Mit der Benutzung dieses Bots willigst du ein, dass deine personenbezogenen Daten von ISIS bezogen und verarbeitet werden! Bitte benutze diesen Bot nicht, wenn du damit nicht einverstanden bist.", inline=False)
+    datenschutzmsg.add_field(name="Achtung!", value="This application was created for research purpose and is not  officially utilized by the TU Berlin. Personal data, such as full names that are published in ISIS forums will be obtained and processed from ISIS in Discord. Users are obliged to use the bot only on Discord servers subscribed by fellow students that are related to the ISIS module you configure it for. Please do not use this bot on Discord servers where you can not guarantee that the personal data of your fellow students is safe from misuse. For more information about TU Berlin data security have a look at https://www.tu-berlin.de/allgemeine-seiten/datenschutz/.", inline=False)
     datenschutzmsg.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
     channel = client.get_channel(channel_id[0])
