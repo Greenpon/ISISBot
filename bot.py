@@ -153,4 +153,8 @@ if __name__ == '__main__':
             logging.debug(e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
     import config
-    client.run(config.Token)
+
+    try:
+        client.run(config.Token)
+    except Exception as e:
+        logging.debug(e)
