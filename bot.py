@@ -5,6 +5,10 @@ from discord.ext import commands
 from datetime import date
 import random
 import ShowForum
+import logging
+
+#LOGGING CONFIG (for debugging)
+logging.basicConfig(filename='debug.log', encoding='utf-8', level=logging.DEBUG)
 
 # DATE DEF
 today = date.today()
@@ -146,6 +150,7 @@ if __name__ == '__main__':
             client.load_extension(extension)
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
+            logging.debug(e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
     import config
     client.run(config.Token)
