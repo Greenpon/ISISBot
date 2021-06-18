@@ -2,6 +2,9 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 18-06 Lennart
+- deleted code for !notif functionality
+
 Changelog 17-06 Anna   
 - Final text for data security modal that shows up after the bot got started
 
