@@ -8,7 +8,7 @@ import ShowForum
 import logging
 
 #LOGGING CONFIG (for debugging)
-logging.basicConfig(filename='debug.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='debug.log')
 
 # DATE DEF
 today = date.today()
