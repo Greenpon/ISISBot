@@ -1,6 +1,7 @@
 import feedparser
 import config
 import discord
+import asyncio
 from discord.ext import commands
 from datetime import date
 from io import StringIO
@@ -14,6 +15,7 @@ import Filtering
 today = date.today()
 d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
+
 
 # strip html tags and only get the needed values inside
 class MLStripper(HTMLParser):
@@ -36,10 +38,13 @@ def strip_tags(html):
     s.feed(html)
     return s.get_data()
 
+
+intervalTime = 10
+
+
 class ShowForum(commands.Cog):
     def __init__(self, client):
         self.client = client
-
 
         # listens to the rss-feed and refreshes it permanently
         # posts new entries from the rss-feed after receiving them
@@ -58,17 +63,17 @@ class ShowForum(commands.Cog):
                 feed = rss.refreshFeed()
                 feed.reverse()
 
-
                 while (True):
-
                     for entry_in_feed in feed:
                         if entry_in_feed.id in IDsUsed:
                             continue
                         else:
                             IDsUsed.append(entry_in_feed.id)
                             if entry_in_feed.published_parsed.tm_year < today.year or \
-                                    (entry_in_feed.published_parsed.tm_year == today.year and entry_in_feed.published_parsed.tm_mon < today.month) or \
-                                     (entry_in_feed.published_parsed.tm_mon == today.month and entry_in_feed.published_parsed.tm_mday < today.day):
+                                    (
+                                            entry_in_feed.published_parsed.tm_year == today.year and entry_in_feed.published_parsed.tm_mon < today.month) or \
+                                    (
+                                            entry_in_feed.published_parsed.tm_mon == today.month and entry_in_feed.published_parsed.tm_mday < today.day):
                                 continue
                             else:
                                 author = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[0]
@@ -122,13 +127,62 @@ class ShowForum(commands.Cog):
                                                 noti = discord.Embed(color=0x990000)
                                                 noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                                                 noti.add_field(name=entry_in_feed.title + " " + author,
-                                                                value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                                                               value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
+                                                                   entry_in_feed.link), inline=False)
+                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                                icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                 await ctx.send(embed=noti)
 
-                    await asyncio.sleep(10)
+                    await asyncio.sleep(intervalTime)
                     feed = rss.refreshFeed()
+
+        # gives user the opportunity to set the refresh interval of Isi.
+        # reacts to !set_interval_to <Int> <[h, min, sec]>
+        # checks if enough and the right arguments are given
+        # if arguments are incorrect, it displays an error message which disappears after 10 seconds
+        # if arguments are correct, user will get a verification message
+        #
+        # CURRENTLY ONLY FOR OWNER
+        # Author: Lennart
+        @client.command()
+        @commands.is_owner()
+        async def set_interval_to(ctx, *args):
+            try:
+                if len(args) != 2:
+                    raise ValueError(
+                        "Please give a number and a unit of time [h, min or sec] for your interval (e.g. **!set_interval_to 60 min**)")
+
+                time = args[0]
+                unit = args[1]
+                if not time.isnumeric():
+                    raise ValueError(
+                        "You provided a " + str(type(time)) + " for the time value, please provide an Integer.")
+                if unit != "sec" and unit != "min" and unit != "h":
+                    raise ValueError("Please provide the right unit (h, min, sec)")
+
+                global intervalTime
+                if (unit == "sec"):
+                    intervalTime = int(time)
+                    unit = "seconds"
+                elif (unit == "min"):
+                    intervalTime = int(time) * 60
+                    unit = "minutes"
+                elif (args[1] == "h"):
+                    intervalTime = int(time) * 360
+                    unit = "hours"
+
+                changeSuccess = discord.Embed(
+                    title="Isi will now check for new Forum entries every " + time + " " + unit, color=0x990000)
+                await ctx.send(embed=changeSuccess)
+
+            except ValueError as e:
+                warn = discord.Embed(title="", color=0x990000)
+                warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                warn.add_field(name="Wrong Input", value=e, inline=False)
+                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=warn, delete_after=10.0)
 
 
 def setup(client):
