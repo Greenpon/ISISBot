@@ -2,6 +2,14 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 23-06 Lennart
+- added !set_interval_to function
+- only for bot owner
+- changes the interval in which the bot checks for new forum posts
+- WIP
+  - some kind of message that with a greater interval,
+    the bot might not get all new messages (RSS Feed 10 entries limit)
+
 Changelog 18-06 Lennart
 - deleted code for !notif functionality
 
