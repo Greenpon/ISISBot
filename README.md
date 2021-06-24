@@ -4,6 +4,7 @@ Python based Dicord bot for ISIS Service TU Berlin
 
 Changelog 24-06 Lennart
 - added warning for set_interval_to() if the interval length is very long (RSS Feed 10 entries limit)
+- updated help() with all entries that can be found in documentation currently
   
 
 Changelog 23-06 Lennart
