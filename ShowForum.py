@@ -174,6 +174,13 @@ class ShowForum(commands.Cog):
 
                 changeSuccess = discord.Embed(
                     title="Isi will now check for new Forum entries every " + time + " " + unit, color=0x990000)
+                if (intervalTime > 2880):
+                    changeSuccess = discord.Embed(
+                        title="Isi will now check for new Forum entries every " + time + " " + unit, color=0xFFD300)
+                    changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                    changeSuccess.add_field(
+                        name="Warning", value="You have set your bot to check for forum entries less than three times a day. Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
+                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
                 await ctx.send(embed=changeSuccess)
 
             except ValueError as e:
