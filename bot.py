@@ -16,7 +16,7 @@ d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
 
 # EXTENSIONS
-extensions = ["Befehle", "Filtering", "ShowForum"]
+extensions = ["CommandHelp", "Filtering", "ShowForum"]
 
 # INIT BOT
 client = commands.Bot(command_prefix='!', help_command=None)
