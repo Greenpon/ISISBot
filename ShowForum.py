@@ -6,13 +6,22 @@ from discord.ext import commands
 from datetime import date
 from io import StringIO
 from html.parser import HTMLParser
-import bot
 
 import config
 import rss
 import Filtering
 
+# DATE DEF
 today = date.today()
+d1 = today.strftime("%d/%m")
+d2 = today.strftime("%d/%m/%y")
+
+#Key-Value Pairs for the Feed, so the user can set multiple Feeds at once
+#Structure {Course.id : Forum.id}
+rssdata = {}
+
+def get_RSSData():
+    return rssdata
 
 # strip html tags and only get the needed values inside
 class MLStripper(HTMLParser):
@@ -51,10 +60,7 @@ class ShowForum(commands.Cog):
         # If the post contains anything from the keyword list the text will be bold and in a different colour
         # If there a no Filterlists it will just post the Notifications without modification
         # Author: Sven & Lennart
-        @client.command()
         async def listen(ctx):
-            if ctx.channel.name == "bot-test":
-
                 IDsUsed = []
 
                 feed = rss.refreshFeed()
@@ -83,7 +89,7 @@ class ShowForum(commands.Cog):
                                     noti.add_field(name=entry_in_feed.title + " " + author,
                                                    value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                        entry_in_feed.link), inline=False)
-                                    noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
+                                    noti.set_footer(text="ISIS Bot v0.1 • " + d2,
                                                     icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                     await ctx.send(embed=noti)
@@ -114,7 +120,7 @@ class ShowForum(commands.Cog):
                                                 noti.add_field(name=entry_in_feed.title + " " + author,
                                                                value="```yaml\n**" + message + "**```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                                    entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
+                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
                                                                 icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                 await ctx.send(embed=noti)
@@ -126,13 +132,88 @@ class ShowForum(commands.Cog):
                                                 noti.add_field(name=entry_in_feed.title + " " + author,
                                                                value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                                    entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
+                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
                                                                 icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                 await ctx.send(embed=noti)
 
                     await asyncio.sleep(intervalTime)
                     feed = rss.refreshFeed()
+
+        # Command to add a new Feed to the bot it will listen to
+        # This also auto starts the listen fuction
+        # Author: Sven
+        @client.command()
+        async def new_feed(ctx, *args):
+            try:
+                if len(args) != 2:
+                    raise ValueError(
+                        "Please give me two numbers first the ID of the Course and then the ID of the Forum.\n"
+                        "e.g. https://isis.tu-berlin.de/rss/file.php/<COURSE ID>/<YOUR SECURITYKEY>/mod_forum/<FORUM ID>/rss.xml")
+
+                course = args[0]
+                forum = args[1]
+
+                if not course.isnumeric() or forum.isnumeric():
+                    raise ValueError(
+                        "You provided at least one wrong input. Please provide two Integer as an input.")
+
+                rssdata[course] = forum
+
+                success = discord.Embed(title="", color=0x990000)
+                success.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                success.add_field(name="New Feed", value="You did set up a new RSS Feed!", inline=False)
+                success.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=success, delete_after=10.0)
+
+                await listen(ctx)
+
+            except ValueError as e:
+                warn = discord.Embed(title="", color=0x990000)
+                warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                warn.add_field(name="Wrong Input", value=e, inline=False)
+                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=warn, delete_after=10.0)
+
+        # Command to add a new Feed to the bot it will listen to
+        # This also auto starts the listen fuction
+        # Author: Sven
+        @client.command()
+        async def remove_feed(ctx, *args):
+            try:
+                if len(args) != 2:
+                    raise ValueError(
+                        "Please give me two numbers first the ID of the Course and then the ID of the Forum.\n"
+                        "e.g. https://isis.tu-berlin.de/rss/file.php/<COURSE ID>/<YOUR SECURITYKEY>/mod_forum/<FORUM ID>/rss.xml")
+
+                course = args[0]
+                forum = args[1]
+
+                if not course.isnumeric() or forum.isnumeric():
+                    raise ValueError(
+                        "You provided at least one wrong input. Please provide two Integer as an input.")
+
+                rssdata.pop(course, forum)
+
+                success = discord.Embed(title="", color=0x990000)
+                success.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                success.add_field(name="Removed Feed", value="You did remove a RSS Feed!", inline=False)
+                success.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=success, delete_after=10.0)
+
+            except ValueError as e:
+                warn = discord.Embed(title="", color=0x990000)
+                warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                warn.add_field(name="Wrong Input", value=e, inline=False)
+                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=warn, delete_after=10.0)
+
+
+
 
         # gives user the opportunity to set the refresh interval of Isi.
         # reacts to !set_interval_to <Int> <[h, min, sec]>
@@ -171,19 +252,20 @@ class ShowForum(commands.Cog):
 
                 changeSuccess = discord.Embed(
                     title="Isi will now check for new Forum entries every " + time + " " + unit, color=0x990000)
-                changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                changeSuccess.add_field(
-                    name="Warning",
-                    value="You have set your bot to check for forum entries less than three times a day. Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.",
-                    inline=False)
-                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                if (intervalTime > 2880):
+                    changeSuccess = discord.Embed(
+                        title="Isi will now check for new Forum entries every " + time + " " + unit, color=0xFFD300)
+                    changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                    changeSuccess.add_field(
+                        name="Warning", value="You have set your bot to check for forum entries less than three times a day. Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
+                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
                 await ctx.send(embed=changeSuccess)
 
             except ValueError as e:
                 warn = discord.Embed(title="", color=0x990000)
                 warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 warn.add_field(name="Wrong Input", value=e, inline=False)
-                warn.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=warn, delete_after=10.0)
 
