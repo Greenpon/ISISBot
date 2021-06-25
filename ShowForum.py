@@ -6,16 +6,13 @@ from discord.ext import commands
 from datetime import date
 from io import StringIO
 from html.parser import HTMLParser
+import bot
 
 import config
 import rss
 import Filtering
 
-# DATE DEF
 today = date.today()
-d1 = today.strftime("%d/%m")
-d2 = today.strftime("%d/%m/%y")
-
 
 # strip html tags and only get the needed values inside
 class MLStripper(HTMLParser):
@@ -86,7 +83,7 @@ class ShowForum(commands.Cog):
                                     noti.add_field(name=entry_in_feed.title + " " + author,
                                                    value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                        entry_in_feed.link), inline=False)
-                                    noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                    noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                                     icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                     await ctx.send(embed=noti)
@@ -117,7 +114,7 @@ class ShowForum(commands.Cog):
                                                 noti.add_field(name=entry_in_feed.title + " " + author,
                                                                value="```yaml\n**" + message + "**```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                                    entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                                                 icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                 await ctx.send(embed=noti)
@@ -129,7 +126,7 @@ class ShowForum(commands.Cog):
                                                 noti.add_field(name=entry_in_feed.title + " " + author,
                                                                value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                                    entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                                                 icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                 await ctx.send(embed=noti)
@@ -174,20 +171,19 @@ class ShowForum(commands.Cog):
 
                 changeSuccess = discord.Embed(
                     title="Isi will now check for new Forum entries every " + time + " " + unit, color=0x990000)
-                if (intervalTime > 2880):
-                    changeSuccess = discord.Embed(
-                        title="Isi will now check for new Forum entries every " + time + " " + unit, color=0xFFD300)
-                    changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    changeSuccess.add_field(
-                        name="Warning", value="You have set your bot to check for forum entries less than three times a day. Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
-                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                changeSuccess.add_field(
+                    name="Warning",
+                    value="You have set your bot to check for forum entries less than three times a day. Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.",
+                    inline=False)
+                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
                 await ctx.send(embed=changeSuccess)
 
             except ValueError as e:
                 warn = discord.Embed(title="", color=0x990000)
                 warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 warn.add_field(name="Wrong Input", value=e, inline=False)
-                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                warn.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=warn, delete_after=10.0)
 

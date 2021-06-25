@@ -11,9 +11,8 @@ import logging
 logging.basicConfig(filename='debug.log')
 
 # DATE DEF
-today = date.today()
-d1 = today.strftime("%d/%m")
-d2 = today.strftime("%d/%m/%y")
+def get_date():
+    return date.today().strftime("%d/%m/%y")
 
 # EXTENSIONS
 extensions = ["CommandHelp", "Filtering", "ShowForum"]
@@ -36,7 +35,7 @@ async def on_command_error(ctx, error):
             errormsg = discord.Embed(title="", color=0x990000)
             errormsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
             errormsg.add_field(name="Achtung!", value="Diesen Befehl kenne ich nicht. \nSchau dir meine Befehle mit !help an.", inline=False)
-            errormsg.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+            errormsg.set_footer(text="ISIS Bot v0.1 • " + get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
             await ctx.send(embed=errormsg)
 
@@ -66,7 +65,7 @@ async def datenschutz():
     datenschutzmsg = discord.Embed(title="", color=0x990000)
     datenschutzmsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
     datenschutzmsg.add_field(name="Disclaimer!", value="This application was created for research purpose and is not  officially utilized by the TU Berlin. Personal data, such as full names that are published in ISIS forums will be obtained and processed from ISIS in Discord. Users are obliged to use the bot only on Discord servers subscribed by fellow students that are related to the ISIS module you configure it for. Please do not use this bot on Discord servers where you can not guarantee that the personal data of your fellow students is safe from misuse. For more information about TU Berlin data security have a look at https://www.tu-berlin.de/allgemeine-seiten/datenschutz/.", inline=False)
-    datenschutzmsg.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+    datenschutzmsg.set_footer(text="ISIS Bot v0.1 • " + get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
     channel = client.get_channel(channel_id[0])
 
