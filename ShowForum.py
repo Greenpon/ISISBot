@@ -61,84 +61,90 @@ class ShowForum(commands.Cog):
         # If there a no Filterlists it will just post the Notifications without modification
         # Author: Sven & Lennart
         async def listen(ctx):
-                IDsUsed = []
+            Listening = True
+            IDsUsed = []
 
-                feed = rss.refreshFeed()
-                feed.reverse()
+            while (Listening):
+                if not rssdata:
+                    Listening = False
+                else:
+                    for entry in get_RSSData():
+                        course_id = int(entry)
+                        forum_id = int(rssdata.get(course_id))
+                        feed = rss.refreshFeed(course_id, forum_id)
+                        feed.reverse()
 
-                while (True):
-                    for entry_in_feed in feed:
-                        if entry_in_feed.id in IDsUsed:
-                            continue
-                        else:
-                            IDsUsed.append(entry_in_feed.id)
-                            if entry_in_feed.published_parsed.tm_year < today.year or \
-                                    (
-                                            entry_in_feed.published_parsed.tm_year == today.year and entry_in_feed.published_parsed.tm_mon < today.month) or \
-                                    (
-                                            entry_in_feed.published_parsed.tm_mon == today.month and entry_in_feed.published_parsed.tm_mday < today.day):
+                        for entry_in_feed in feed:
+                            if entry_in_feed.id in IDsUsed:
                                 continue
                             else:
-                                author = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[0]
-                                message = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[1]
-
-                                users = Filtering.getUsers()
-                                if not users:
-                                    noti = discord.Embed(color=0x990000)
-                                    noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                                    noti.add_field(name=entry_in_feed.title + " " + author,
-                                                   value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
-                                                       entry_in_feed.link), inline=False)
-                                    noti.set_footer(text="ISIS Bot v0.1 • " + d2,
-                                                    icon_url="https://i.imgur.com/s8Ni2X1.png")
-
-                                    await ctx.send(embed=noti)
+                                IDsUsed.append(entry_in_feed.id)
+                                if entry_in_feed.published_parsed.tm_year < today.year or \
+                                        (
+                                                entry_in_feed.published_parsed.tm_year == today.year and entry_in_feed.published_parsed.tm_mon < today.month) or \
+                                        (
+                                                entry_in_feed.published_parsed.tm_mon == today.month and entry_in_feed.published_parsed.tm_mday < today.day):
+                                    continue
                                 else:
-                                    for user in users:
-                                        pairs = Filtering.getPairs()
-                                        blist = Filtering.getBlacklist()
+                                    author = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[0]
+                                    message = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[1]
 
-                                        post = True
+                                    users = Filtering.getUsers()
+                                    if not users:
+                                        noti = discord.Embed(color=0x990000)
+                                        noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                                        noti.add_field(name=entry_in_feed.title + " " + author,
+                                                       value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
+                                                           entry_in_feed.link), inline=False)
+                                        noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                        icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                                        for x in blist[pairs.get(user)]:
-                                            if x in entry_in_feed.title or x in author or x in message:
-                                                post = False
+                                        await ctx.send(embed=noti)
+                                    else:
+                                        for user in users:
+                                            pairs = Filtering.getPairs()
+                                            blist = Filtering.getBlacklist()
 
-                                        if post:
-                                            klist = Filtering.getKeywordlist()
+                                            post = True
 
-                                            mark = False
-
-                                            for x in klist[pairs.get(user)]:
+                                            for x in blist[pairs.get(user)]:
                                                 if x in entry_in_feed.title or x in author or x in message:
-                                                    mark = True
+                                                    post = False
 
-                                            if mark:
-                                                await ctx.send("Neue Benachrichtigung für <@{}>".format(user))
-                                                noti = discord.Embed(color=0x990000)
-                                                noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                                                noti.add_field(name=entry_in_feed.title + " " + author,
-                                                               value="```yaml\n**" + message + "**```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
-                                                                   entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
-                                                                icon_url="https://i.imgur.com/s8Ni2X1.png")
+                                            if post:
+                                                klist = Filtering.getKeywordlist()
 
-                                                await ctx.send(embed=noti)
+                                                mark = False
 
-                                            else:
-                                                await ctx.send("Neue Benachrichtigung für <@{}>".format(user))
-                                                noti = discord.Embed(color=0x990000)
-                                                noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                                                noti.add_field(name=entry_in_feed.title + " " + author,
-                                                               value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
-                                                                   entry_in_feed.link), inline=False)
-                                                noti.set_footer(text="ISIS Bot v0.1 • " + d2,
-                                                                icon_url="https://i.imgur.com/s8Ni2X1.png")
+                                                for x in klist[pairs.get(user)]:
+                                                    if x in entry_in_feed.title or x in author or x in message:
+                                                        mark = True
 
-                                                await ctx.send(embed=noti)
+                                                if mark:
+                                                    await ctx.send("Neue Benachrichtigung für <@{}>".format(user))
+                                                    noti = discord.Embed(color=0x990000)
+                                                    noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                                                    noti.add_field(name=entry_in_feed.title + " " + author,
+                                                                   value="```yaml\n**" + message + "**```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
+                                                                       entry_in_feed.link), inline=False)
+                                                    noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                                    icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                    await asyncio.sleep(intervalTime)
-                    feed = rss.refreshFeed()
+                                                    await ctx.send(embed=noti)
+
+                                                else:
+                                                    await ctx.send("Neue Benachrichtigung für <@{}>".format(user))
+                                                    noti = discord.Embed(color=0x990000)
+                                                    noti.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                                                    noti.add_field(name=entry_in_feed.title + " " + author,
+                                                                   value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
+                                                                       entry_in_feed.link), inline=False)
+                                                    noti.set_footer(text="ISIS Bot v0.1 • " + d2,
+                                                                    icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                                                    await ctx.send(embed=noti)
+
+                await asyncio.sleep(intervalTime)
 
         # Command to add a new Feed to the bot it will listen to
         # This also auto starts the listen fuction

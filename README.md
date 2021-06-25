@@ -6,9 +6,9 @@ Changelog 25-06 Sven
 - Added Key,Value Pairs to Add feeds
 - Added the possibility to remove feeds
 - Implemented an auto start up for the listen after atleast one feed is added
+- Checking if at least one feed is added while listening
+- update rss.py to get all the Feeds, which were added
 - WIP
-  - Checking if at least one feed is added while listening
-  - update rss.py to get all the Feeds, which were added
   - Testing and bug fixing
 
 Changelog 25-06 Lennart
