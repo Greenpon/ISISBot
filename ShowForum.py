@@ -16,6 +16,12 @@ today = date.today()
 d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
 
+#Key-Value Pairs for the Feed, so the user can set multiple Feeds at once
+#Structure {Course.id : Forum.id}
+rssdata = {}
+
+def get_RSSData():
+    return rssdata
 
 # strip html tags and only get the needed values inside
 class MLStripper(HTMLParser):
@@ -54,10 +60,7 @@ class ShowForum(commands.Cog):
         # If the post contains anything from the keyword list the text will be bold and in a different colour
         # If there a no Filterlists it will just post the Notifications without modification
         # Author: Sven & Lennart
-        @client.command()
         async def listen(ctx):
-            if ctx.channel.name == "bot-test":
-
                 IDsUsed = []
 
                 feed = rss.refreshFeed()
@@ -136,6 +139,81 @@ class ShowForum(commands.Cog):
 
                     await asyncio.sleep(intervalTime)
                     feed = rss.refreshFeed()
+
+        # Command to add a new Feed to the bot it will listen to
+        # This also auto starts the listen fuction
+        # Author: Sven
+        @client.command()
+        async def new_feed(ctx, *args):
+            try:
+                if len(args) != 2:
+                    raise ValueError(
+                        "Please give me two numbers first the ID of the Course and then the ID of the Forum.\n"
+                        "e.g. https://isis.tu-berlin.de/rss/file.php/<COURSE ID>/<YOUR SECURITYKEY>/mod_forum/<FORUM ID>/rss.xml")
+
+                course = args[0]
+                forum = args[1]
+
+                if not course.isnumeric() or forum.isnumeric():
+                    raise ValueError(
+                        "You provided at least one wrong input. Please provide two Integer as an input.")
+
+                rssdata[course] = forum
+
+                success = discord.Embed(title="", color=0x990000)
+                success.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                success.add_field(name="New Feed", value="You did set up a new RSS Feed!", inline=False)
+                success.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=success, delete_after=10.0)
+
+                await listen(ctx)
+
+            except ValueError as e:
+                warn = discord.Embed(title="", color=0x990000)
+                warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                warn.add_field(name="Wrong Input", value=e, inline=False)
+                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=warn, delete_after=10.0)
+
+        # Command to add a new Feed to the bot it will listen to
+        # This also auto starts the listen fuction
+        # Author: Sven
+        @client.command()
+        async def remove_feed(ctx, *args):
+            try:
+                if len(args) != 2:
+                    raise ValueError(
+                        "Please give me two numbers first the ID of the Course and then the ID of the Forum.\n"
+                        "e.g. https://isis.tu-berlin.de/rss/file.php/<COURSE ID>/<YOUR SECURITYKEY>/mod_forum/<FORUM ID>/rss.xml")
+
+                course = args[0]
+                forum = args[1]
+
+                if not course.isnumeric() or forum.isnumeric():
+                    raise ValueError(
+                        "You provided at least one wrong input. Please provide two Integer as an input.")
+
+                rssdata.pop(course, forum)
+
+                success = discord.Embed(title="", color=0x990000)
+                success.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                success.add_field(name="Removed Feed", value="You did remove a RSS Feed!", inline=False)
+                success.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=success, delete_after=10.0)
+
+            except ValueError as e:
+                warn = discord.Embed(title="", color=0x990000)
+                warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                warn.add_field(name="Wrong Input", value=e, inline=False)
+                warn.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.send(embed=warn, delete_after=10.0)
+
+
+
 
         # gives user the opportunity to set the refresh interval of Isi.
         # reacts to !set_interval_to <Int> <[h, min, sec]>

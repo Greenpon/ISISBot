@@ -2,6 +2,15 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 25-06 Sven
+- Added Key,Value Pairs to Add feeds
+- Added the possibility to remove feeds
+- Implemented an auto start up for the listen after atleast one feed is added
+- WIP
+  - Checking if at least one feed is added while listening
+  - update rss.py to get all the Feeds, which were added
+  - Testing and bug fixing
+
 Changelog 25-06 Lennart
 - changed Filtering.py dialog output text to english without !create request.
 - changed !help function embed to disappear after 30 seconds as to not clutter the discord channel.
