@@ -61,12 +61,12 @@ class ShowForum(commands.Cog):
         # If there a no Filterlists it will just post the Notifications without modification
         # Author: Sven & Lennart
         async def listen(ctx):
-            Listening = True
             IDsUsed = []
+            listening = True
 
-            while (Listening):
+            while (listening):
                 if not rssdata:
-                    Listening = False
+                    listening = False
                 else:
                     for entry in get_RSSData():
                         course_id = int(entry)
@@ -144,7 +144,8 @@ class ShowForum(commands.Cog):
 
                                                     await ctx.send(embed=noti)
 
-                await asyncio.sleep(intervalTime)
+                    await asyncio.sleep(intervalTime)
+
 
         # Command to add a new Feed to the bot it will listen to
         # This also auto starts the listen fuction

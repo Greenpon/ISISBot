@@ -15,6 +15,7 @@ Changelog 25-06 Lennart
 - changed Filtering.py dialog output text to english without !create request.
 - changed !help function embed to disappear after 30 seconds as to not clutter the discord channel.
 - renamed missed occurances of Befehle which has been renamed to CommandHelp in last push on 24-06-21.
+- changed all occurances of dates (mostly in footers) to show current date dynamically
 
 Changelog 24-06 Lennart
 - added warning for set_interval_to() if the interval length is very long (RSS Feed 10 entries limit)

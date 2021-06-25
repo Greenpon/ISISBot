@@ -6,10 +6,6 @@ import ShowForum
 #Import from bot
 import config
 
-today = bot.today
-d1 = bot.d1
-d2 = bot.d2
-
 # Storing the channel id
 channel_id = []
 post_id = []
@@ -59,7 +55,7 @@ class Filtering(commands.Cog):
                     whitelist.add_field(name="Your Whitelist now contains:",
                                         value=wlist[pairs.get(ctx.author.id)],
                                         inline=False)
-                    whitelist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    whitelist.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=whitelist)
 
@@ -69,7 +65,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                   value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                   inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
 
@@ -92,7 +88,7 @@ class Filtering(commands.Cog):
                     whitelist.add_field(name="Your Whitelist now contains:",
                                         value=wlist[pairs.get(ctx.author.id)],
                                         inline=False)
-                    whitelist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    whitelist.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=whitelist)
 
@@ -102,7 +98,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                           value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
 
@@ -121,7 +117,7 @@ class Filtering(commands.Cog):
                     blacklist.add_field(name="Your Blacklist now contains:",
                                         value=blist[pairs.get(ctx.author.id)],
                                         inline=False)
-                    blacklist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    blacklist.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=blacklist)
 
@@ -131,7 +127,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                           value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
 
@@ -154,7 +150,7 @@ class Filtering(commands.Cog):
                     blacklist.add_field(name="Your Blacklist now contains:",
                                         value=blist[pairs.get(ctx.author.id)],
                                         inline=False)
-                    blacklist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    blacklist.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=blacklist)
 
@@ -164,7 +160,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                           value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
 
@@ -183,7 +179,7 @@ class Filtering(commands.Cog):
                     keyword.add_field(name="Your Keyword list now contains:",
                                         value=klist[pairs.get(ctx.author.id)],
                                         inline=False)
-                    keyword.set_footer(text="ISIS Bot v0.1 • " + d2,
+                    keyword.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                          icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=keyword)
@@ -194,7 +190,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                           value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2,
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
@@ -218,7 +214,7 @@ class Filtering(commands.Cog):
                     keyword.add_field(name="Your Keyword list now contains:",
                                         value=klist[pairs.get(ctx.author.id)],
                                         inline=False)
-                    keyword.set_footer(text="ISIS Bot v0.1 • " + d2,
+                    keyword.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                         icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=keyword)
@@ -229,7 +225,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                           value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2,
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
@@ -270,7 +266,7 @@ class Filtering(commands.Cog):
                                           value=klist[pairs.get(ctx.author.id)],
                                           inline=False)
 
-                    current.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    current.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=current)
 
@@ -280,7 +276,7 @@ class Filtering(commands.Cog):
                     createfirst.add_field(name="No filter lists yet!",
                                           value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
-                    createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                    createfirst.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
 
@@ -332,7 +328,7 @@ class Filtering(commands.Cog):
                                       "Get information about you Filter lists with !show \n"
                                       "e.g. \"!add_b Klausur\" will add Klausur to your blacklist \n",
                                         inline=False)
-                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                create.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=create)
 
@@ -348,7 +344,7 @@ class Filtering(commands.Cog):
                                       "Get information about you Filter lists with !show \n"
                                       "e.g. \"!add_b Klausur\" will add Klausur to your blacklist \n",
                                  inline=False)
-                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                create.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=create)
 
@@ -361,7 +357,7 @@ class Filtering(commands.Cog):
                                       "Get information about you Filter lists with !show \n"
                                       "e.g. \"!add_b Klausur\" will add Klausur to your blacklist \n",
                                 inline=False)
-                create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                create.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=create)
 
@@ -378,7 +374,7 @@ class Filtering(commands.Cog):
                 remove.add_field(name="You don't agree to the data security statement anymore!",
                                  value="Your filter lists will be saved for if you ever change your mind.",
                                  inline=False)
-                remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                remove.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=remove)
 
@@ -388,7 +384,7 @@ class Filtering(commands.Cog):
                 remove.add_field(name="You haven't agreed to the data security statement!",
                                  value="Nothing has changed, you can't use the bot.",
                                  inline=False)
-                remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
+                remove.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=remove)
 
