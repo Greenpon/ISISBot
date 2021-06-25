@@ -56,7 +56,7 @@ class Filtering(commands.Cog):
 
                     whitelist = discord.Embed(title="Whitelist", color=0x990000)
                     whitelist.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    whitelist.add_field(name="Die Whitelist enthällt nun:",
+                    whitelist.add_field(name="Your Whitelist now contains:",
                                         value=wlist[pairs.get(ctx.author.id)],
                                         inline=False)
                     whitelist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
@@ -64,10 +64,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=whitelist)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter Lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                  value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                  value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                   inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
@@ -89,7 +89,7 @@ class Filtering(commands.Cog):
 
                     whitelist = discord.Embed(title="Whitelist", color=0x990000)
                     whitelist.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    whitelist.add_field(name="Die Whitelist enthällt nun:",
+                    whitelist.add_field(name="Your Whitelist now contains:",
                                         value=wlist[pairs.get(ctx.author.id)],
                                         inline=False)
                     whitelist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
@@ -97,10 +97,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=whitelist)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter Lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                          value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                          value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
@@ -116,9 +116,9 @@ class Filtering(commands.Cog):
                 if ctx.author.id in pairs:
                     blist[pairs.get(ctx.author.id)].append(message)
 
-                    blacklist = discord.Embed(title="Whitelist", color=0x990000)
+                    blacklist = discord.Embed(title="Blacklist", color=0x990000)
                     blacklist.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    blacklist.add_field(name="Die Blacklist enthällt nun:",
+                    blacklist.add_field(name="Your Blacklist now contains:",
                                         value=blist[pairs.get(ctx.author.id)],
                                         inline=False)
                     blacklist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
@@ -126,10 +126,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=blacklist)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter Lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                          value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                          value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
@@ -149,9 +149,9 @@ class Filtering(commands.Cog):
                     except ValueError:
                         pass
 
-                    blacklist = discord.Embed(title="Whitelist", color=0x990000)
+                    blacklist = discord.Embed(title="Blacklist", color=0x990000)
                     blacklist.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    blacklist.add_field(name="Die Blacklist enthällt nun:",
+                    blacklist.add_field(name="Your Blacklist now contains:",
                                         value=blist[pairs.get(ctx.author.id)],
                                         inline=False)
                     blacklist.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
@@ -159,10 +159,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=blacklist)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter Lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                          value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                          value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
@@ -178,9 +178,9 @@ class Filtering(commands.Cog):
                 if ctx.author.id in pairs:
                     klist[pairs.get(ctx.author.id)].append(message)
 
-                    keyword = discord.Embed(title="Keywords", color=0x990000)
+                    keyword = discord.Embed(title="Keyword List", color=0x990000)
                     keyword.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    keyword.add_field(name="Du hast folgende Keywords gesetzt:",
+                    keyword.add_field(name="Your Keyword list now contains:",
                                         value=klist[pairs.get(ctx.author.id)],
                                         inline=False)
                     keyword.set_footer(text="ISIS Bot v0.1 • " + d2,
@@ -189,10 +189,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=keyword)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter Lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                          value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                          value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2,
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
@@ -213,9 +213,9 @@ class Filtering(commands.Cog):
                     except ValueError:
                         pass
 
-                    keyword = discord.Embed(title="Keywords", color=0x990000)
+                    keyword = discord.Embed(title="Keyword List", color=0x990000)
                     keyword.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    keyword.add_field(name="Du hast folgende Keywords gesetzt:",
+                    keyword.add_field(name="Your Keyword list now contains:",
                                         value=klist[pairs.get(ctx.author.id)],
                                         inline=False)
                     keyword.set_footer(text="ISIS Bot v0.1 • " + d2,
@@ -224,10 +224,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=keyword)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter Lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                          value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                          value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2,
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
@@ -244,29 +244,29 @@ class Filtering(commands.Cog):
         async def show(ctx):
             if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
-                    current = discord.Embed(title="Filterlisten", color=0x990000)
+                    current = discord.Embed(title="Filter Lists", color=0x990000)
                     current.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
 
                     if ctx.invoked_with.lower() == "show_w":
-                        current.add_field(name="Die Whitelist enthällt aktuell:",
+                        current.add_field(name="Your Whitelist currently contains:",
                                           value=wlist[pairs.get(ctx.author.id)],
                                           inline=False)
                     elif ctx.invoked_with.lower() == "show_b":
-                        current.add_field(name="Die Blacklist enthällt aktuell:",
+                        current.add_field(name="Your Blacklist currently contains:",
                                           value=blist[pairs.get(ctx.author.id)],
                                           inline=False)
                     elif ctx.invoked_with.lower() == "show_k":
-                        current.add_field(name="Du hast folgende Keywords gesetzt:",
+                        current.add_field(name="Your Keyword list currently contains:",
                                           value=klist[pairs.get(ctx.author.id)],
                                           inline=False)
                     else:
-                        current.add_field(name="Die Whitelist enthällt aktuell:",
+                        current.add_field(name="Your Whitelist currently contains:",
                                           value=wlist[pairs.get(ctx.author.id)],
                                           inline=False)
-                        current.add_field(name="Die Blacklist enthällt aktuell:",
+                        current.add_field(name="Your Blacklist currently contains:",
                                           value=blist[pairs.get(ctx.author.id)],
                                           inline=False)
-                        current.add_field(name="Du hast folgende Keywords gesetzt:",
+                        current.add_field(name="Your Keyword list currently contains::",
                                           value=klist[pairs.get(ctx.author.id)],
                                           inline=False)
 
@@ -275,10 +275,10 @@ class Filtering(commands.Cog):
                     await ctx.author.send(embed=current)
 
                 else:
-                    createfirst = discord.Embed(title="Filterlisten", color=0x990000)
+                    createfirst = discord.Embed(title="Filter lists", color=0x990000)
                     createfirst.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    createfirst.add_field(name="Du besitzt noch keine Filterlisten",
-                                          value="Mit !create erstellen",
+                    createfirst.add_field(name="No filter lists yet!",
+                                          value="Filter lists will be created automatically after you have read the data security notice and agreed by reacting with the green checkmark emoji.",
                                           inline=False)
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
@@ -324,13 +324,13 @@ class Filtering(commands.Cog):
                 blist.append([])
                 klist.append([])
 
-                create = discord.Embed(title="Filterlisten", color=0x990000)
+                create = discord.Embed(title="Filter lists", color=0x990000)
                 create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                create.add_field(name="Du hast dem Datenschutz zugestimmt und es wurden Filterlisten erstellt",
-                                value="Mit !add_w Sachen zur Whitelist hinzufügen. "
-                                        "Mit !add_b Sachen zur Blacklist hinzufügen. "
-                                        "Mit !add_k Sachen zu den Keywords hinzufügen. "
-                                        "Beispiel: !add_w 'Test' fügt 'Test' zur Whitelist hinzu.",
+                create.add_field(name="You have agreed to the data security statement and Filter lists were created:",
+                                value="Add entries to your Blacklist with !add_b \n"
+                                      "Add entries to your Keyowrd list with !add_k \n"
+                                      "Get information about you Filter lists with !show \n"
+                                      "e.g. \"!add_b Klausur\" will add Klausur to your blacklist \n",
                                         inline=False)
                 create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
@@ -340,26 +340,27 @@ class Filtering(commands.Cog):
             elif id not in user:
                 user.append(id)
 
-                create = discord.Embed(title="Filterlisten", color=0x990000)
+                create = discord.Embed(title="Filter lists", color=0x990000)
                 create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                create.add_field(name="Du stimmst dem Datenschutz nun wieder zu!",
-                                 value="Mit !add_w Sachen zur Whitelist hinzufügen. "
-                                       "Mit !add_b Sachen zur Blacklist hinzufügen. "
-                                       "Mit !add_k Sachen zu den Keywords hinzufügen. "
-                                       "Beispiel: !add_w 'Test' fügt 'Test' zur Whitelist hinzu.",
+                create.add_field(name="You agree to the Datenschutz again!",
+                                 value="Add entries to your Blacklist with !add_b \n"
+                                      "Add entries to your Keyowrd list with !add_k \n"
+                                      "Get information about you Filter lists with !show \n"
+                                      "e.g. \"!add_b Klausur\" will add Klausur to your blacklist \n",
                                  inline=False)
                 create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=create)
 
             else:
-                create = discord.Embed(title="Datenschutz", color=0x990000)
+                create = discord.Embed(title="Date security", color=0x990000)
                 create.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                create.add_field(name="Du hast dem Datenschutz bereits zugestimmt!",
-                                value="Nun kannst du mit !add_w Sachen zur Whitelist hinzufügen. Mit !add_b kannst du Sachen zur Blacklist "
-                                        "hinzufügen. Außerdem kannst du mit !remove_w und remove_b Sachen entfernen. "
-                                        "Beispiel: !add_w Test",
-                                    inline=False)
+                create.add_field(name="You already agreed to the data security statement!",
+                                value="Add entries to your Blacklist with !add_b \n"
+                                      "Add entries to your Keyowrd list with !add_k \n"
+                                      "Get information about you Filter lists with !show \n"
+                                      "e.g. \"!add_b Klausur\" will add Klausur to your blacklist \n",
+                                inline=False)
                 create.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=create)
@@ -372,20 +373,20 @@ class Filtering(commands.Cog):
 
                 user.remove(id)
 
-                remove = discord.Embed(title="Datenschutz", color=0x990000)
+                remove = discord.Embed(title="Data security", color=0x990000)
                 remove.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                remove.add_field(name="Du stimmst dem Datenschutz jetzt nicht mehr zu!",
-                                 value="Deine Filterlisten bleiben jedoch gespeichert, falls du dich umentscheidest.",
+                remove.add_field(name="You don't agree to the data security statement anymore!",
+                                 value="Your filter lists will be saved for if you ever change your mind.",
                                  inline=False)
                 remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await author.send(embed=remove)
 
             else:
-                remove = discord.Embed(title="Datenschutz", color=0x990000)
+                remove = discord.Embed(title="Data security", color=0x990000)
                 remove.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                remove.add_field(name="Du hattest dem Datenschutz nicht zugestimmt!",
-                                 value="Es hat sich nichts geändert du kannst den Bot nicht nutzen.",
+                remove.add_field(name="You haven't agreed to the data security statement!",
+                                 value="Nothing has changed, you can't use the bot.",
                                  inline=False)
                 remove.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 

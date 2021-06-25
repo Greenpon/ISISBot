@@ -8,7 +8,7 @@ d1 = today.strftime("%d/%m")
 d2 = today.strftime("%d/%m/%y")
 
 
-class Befehle(commands.Cog):
+class CommandHelp(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -28,8 +28,8 @@ class Befehle(commands.Cog):
                 hilfe.add_field(name="!set_interval_to", value="followed by a number and a unit (h, min, sec), you can adjust the frequency the bot checks for new forum entries \n (e.g. !set_interval_to 30 min)", inline=False)
                 hilfe.set_footer(text="ISIS Bot v0.1 • " + d2, icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=hilfe)
+                await ctx.send(embed=hilfe, delete_after=30.0)
 
 
 def setup(client):
-    client.add_cog(Befehle(client))
+    client.add_cog(CommandHelp(client))
