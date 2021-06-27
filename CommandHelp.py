@@ -21,7 +21,7 @@ class CommandHelp(commands.Cog):
                 hilfe.add_field(name="!show / !show_b / !show_k", value="sends the current state of all of your filter lists to your personal chat", inline=False)
                 hilfe.add_field(name="!shutdown", value="shuts down the bot", inline=False)
                 hilfe.add_field(name="!set_interval_to", value="followed by a number and a unit (h, min, sec), you can adjust the frequency the bot checks for new forum entries \n (e.g. !set_interval_to 30 min)", inline=False)
-                hilfe.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                hilfe.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=hilfe, delete_after=30.0)
 

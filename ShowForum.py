@@ -1,14 +1,10 @@
-import feedparser
-import config
 import discord
 import asyncio
 from discord.ext import commands
-from datetime import date
 from io import StringIO
 from html.parser import HTMLParser
-import bot
+from datetime import date
 
-import config
 import rss
 import Filtering
 
@@ -77,11 +73,11 @@ class ShowForum(commands.Cog):
                                 continue
                             else:
                                 IDsUsed.append(entry_in_feed.id)
-                                if entry_in_feed.published_parsed.tm_year < today.year or \
+                                if entry_in_feed.published_parsed.tm_year < date.today().year or \
                                         (
-                                                entry_in_feed.published_parsed.tm_year == today.year and entry_in_feed.published_parsed.tm_mon < today.month) or \
+                                                entry_in_feed.published_parsed.tm_year == date.today().year and entry_in_feed.published_parsed.tm_mon < date.today().month) or \
                                         (
-                                                entry_in_feed.published_parsed.tm_mon == today.month and entry_in_feed.published_parsed.tm_mday < today.day):
+                                                entry_in_feed.published_parsed.tm_mon == date.today().month and entry_in_feed.published_parsed.tm_mday < date.today().day):
                                     continue
                                 else:
                                     author = strip_tags(entry_in_feed.summary).replace(u'\xa0', u'').split(".")[0]
@@ -94,7 +90,7 @@ class ShowForum(commands.Cog):
                                         noti.add_field(name=entry_in_feed.title + " " + author,
                                                        value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                            entry_in_feed.link), inline=False)
-                                        noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
+                                        noti.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
                                                         icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                         await ctx.send(embed=noti)
@@ -125,7 +121,7 @@ class ShowForum(commands.Cog):
                                                     noti.add_field(name=entry_in_feed.title + " " + author,
                                                                    value="```yaml\n**" + message + "**```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                                        entry_in_feed.link), inline=False)
-                                                    noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
+                                                    noti.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
                                                                     icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                     await ctx.send(embed=noti)
@@ -137,7 +133,7 @@ class ShowForum(commands.Cog):
                                                     noti.add_field(name=entry_in_feed.title + " " + author,
                                                                    value="```" + message + "```" + "\n" + entry_in_feed.published + "\n" + "[Direktlink]({})".format(
                                                                        entry_in_feed.link), inline=False)
-                                                    noti.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(),
+                                                    noti.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
                                                                     icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                                                     await ctx.send(embed=noti)
@@ -168,7 +164,7 @@ class ShowForum(commands.Cog):
                 success = discord.Embed(title="", color=0x990000)
                 success.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 success.add_field(name="New Feed", value="You did set up a new RSS Feed!", inline=False)
-                success.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                success.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=success, delete_after=10.0)
 
@@ -178,7 +174,7 @@ class ShowForum(commands.Cog):
                 warn = discord.Embed(title="", color=0x990000)
                 warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 warn.add_field(name="Wrong Input", value=e, inline=False)
-                warn.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                warn.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=warn, delete_after=10.0)
 
@@ -205,7 +201,7 @@ class ShowForum(commands.Cog):
                 success = discord.Embed(title="", color=0x990000)
                 success.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 success.add_field(name="Removed Feed", value="You did remove a RSS Feed!", inline=False)
-                success.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                success.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=success, delete_after=10.0)
 
@@ -213,7 +209,7 @@ class ShowForum(commands.Cog):
                 warn = discord.Embed(title="", color=0x990000)
                 warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 warn.add_field(name="Wrong Input", value=e, inline=False)
-                warn.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                warn.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=warn, delete_after=10.0)
 
@@ -262,15 +258,15 @@ class ShowForum(commands.Cog):
                         title="Isi will now check for new Forum entries every " + time + " " + unit, color=0xFFD300)
                     changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                     changeSuccess.add_field(
-                        name="Warning", value="You have set your bot to check for forum entries less than three times a day. Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
-                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                        name="Warning", value="Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
+                changeSuccess.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
                 await ctx.send(embed=changeSuccess)
 
             except ValueError as e:
                 warn = discord.Embed(title="", color=0x990000)
                 warn.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 warn.add_field(name="Wrong Input", value=e, inline=False)
-                warn.set_footer(text="ISIS Bot v0.1 • " + bot.get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
+                warn.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.send(embed=warn, delete_after=10.0)
 
