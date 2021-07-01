@@ -176,7 +176,7 @@ class ShowForum(commands.Cog):
                 warn.add_field(name="Wrong Input", value=e, inline=False)
                 warn.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=warn, delete_after=10.0)
+                await ctx.send(embed=warn, delete_after=20.0)
 
         # Command to add a new Feed to the bot it will listen to
         # This also auto starts the listen fuction
@@ -211,7 +211,7 @@ class ShowForum(commands.Cog):
                 warn.add_field(name="Wrong Input", value=e, inline=False)
                 warn.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=warn, delete_after=10.0)
+                await ctx.send(embed=warn, delete_after=20.0)
 
 
 
@@ -251,14 +251,10 @@ class ShowForum(commands.Cog):
                     intervalTime = int(time) * 360
                     unit = "hours"
 
-                changeSuccess = discord.Embed(
-                    title="Isi will now check for new Forum entries every " + time + " " + unit, color=0x990000)
-                if (intervalTime > 2880):
-                    changeSuccess = discord.Embed(
-                        title="Isi will now check for new Forum entries every " + time + " " + unit, color=0xFFD300)
-                    changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-                    changeSuccess.add_field(
-                        name="Warning", value="Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
+
+                changeSuccess = discord.Embed(title="Isi will now check for new Forum entries every " + time + " " + unit, color=0xFFD300)
+                changeSuccess.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                changeSuccess.add_field(name="Warning", value="Due to restrictions by moodle and the RSS feed, Isi can only recieve the latest ten entries. \n If the forum Isi is listening to has a lot of traffic, you might miss out on some of the entries.", inline=False)
                 changeSuccess.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
                 await ctx.send(embed=changeSuccess)
 
@@ -268,7 +264,7 @@ class ShowForum(commands.Cog):
                 warn.add_field(name="Wrong Input", value=e, inline=False)
                 warn.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
-                await ctx.send(embed=warn, delete_after=10.0)
+                await ctx.send(embed=warn, delete_after=20.0)
 
 
 def setup(client):

@@ -2,6 +2,11 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 01-07
+- doubled delete-after times for new_feed, remove_feed and set_interval_to warning messages
+  so the User has a little more time to read through the information being asked
+- corrected typo in data security
+
 Changelog 27-06 Lennart
 - redid the dates in all embed footers and the if condition in listen function
 - cleaned up some embed texts
