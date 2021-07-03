@@ -67,6 +67,16 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                                     value="Please start me with !start in this channel to access this command!",
+                                     inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
+                                      icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # Remove Function for whitelists
         # reacts to !remove_w 'Test' and removes Test from the whitelist
@@ -100,6 +110,16 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                                     value="Please start me with !start in this channel to access this command!",
+                                     inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
+                                      icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # Add Function for blacklists
         # reacts to !add_b 'Test' and adds Test to the blacklist
@@ -129,6 +149,16 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                                     value="Please start me with !start in this channel to access this command!",
+                                     inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
+                                      icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # Remove Function for blacklists
         # reacts to !remove_b 'Test' and removes Test from the blacklist
@@ -162,6 +192,16 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                                     value="Please start me with !start in this channel to access this command!",
+                                     inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
+                                      icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # Add Function for Keywords
         # reacts to !add_k 'Test' and adds Test to Keywords
@@ -193,6 +233,16 @@ class Filtering(commands.Cog):
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                                     value="Please start me with !start in this channel to access this command!",
+                                     inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
+                                      icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # Remove Function for Keywords
         # reacts to !remove_k 'Test' and removes Test from the Keywords
@@ -228,6 +278,16 @@ class Filtering(commands.Cog):
                                            icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                                     value="Please start me with !start in this channel to access this command!",
+                                     inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"),
+                                      icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # Shows current Filterlisten
         # reacts to !show to show all lists but also reacts to !show_w , !show_b and !show_k
@@ -278,6 +338,15 @@ class Filtering(commands.Cog):
                     createfirst.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                     await ctx.author.send(embed=createfirst)
+            else:
+                notstarted = discord.Embed(title="Start me!", color=0x990000)
+                notstarted.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
+                notstarted.add_field(name="I am not started yet or i am not set up for this channel!",
+                              value="Please start me with !start in this channel to access this command!",
+                              inline=False)
+                notstarted.set_footer(text="ISIS Bot v0.1 • " + date.today().strftime("%d/%m/%y"), icon_url="https://i.imgur.com/s8Ni2X1.png")
+
+                await ctx.author.send(embed=notstarted)
 
         # waits for Reacts to the Datenschutz message
         # Checks if the user reacted to the right message in the right channel
