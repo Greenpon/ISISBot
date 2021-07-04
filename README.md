@@ -2,6 +2,9 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 04-07 Lennart
+- added newest commands to !help function
+
 Changelog 03-07 Sven
 - Added Error messages and notes if the bot is not started yet.
 
