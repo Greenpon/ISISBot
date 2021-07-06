@@ -2,6 +2,9 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
+Changelog 06-07 Anna
+- added config template with placeholders for discord app token and ISIS security key
+
 Changelog 04-07 Lennart
 - added newest commands to !help function
 
