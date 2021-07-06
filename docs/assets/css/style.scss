@@ -1,0 +1,97 @@
+---
+---
+
+@import "{{ site.theme }}";
+html {
+    background: whitesmoke;
+}
+body {
+    line-height: 1.6;
+}
+a {
+    color: #8b9dfd;
+}
+strong {
+    opacity: 0.9;
+}
+.main-content table th {
+    border-bottom: 1px solid #606c71;
+}
+tbody {
+    border-bottom: 1px solid #606c71;
+}
+tbody tr:last-child {
+    border-bottom: 2px solid #99a0a37a;
+}
+.main-content table td {
+    padding: 0rem 1rem;
+    border: 0px solid #e9ebec;
+    text-align: left;
+    border-left: 2px solid #c9cdce;
+    border-right: 2px solid #c9cdce;
+}
+.main-content table th {
+    border-left: 2px solid #c9cdce;
+    border: 2px solid #c9cdce;
+    text-align: left;
+}
+thead {
+    background: #c9cdce4f;
+}
+.btn {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+.page-header {
+    background: rgba(139, 157, 253, 1) 67%;
+    /* background: linear-gradient(
+        157deg,
+        rgba(197, 16, 33, 1) 0%,
+        rgba(139, 157, 253, 1) 67%,
+        rgba(230, 229, 228, 1) 100%
+    );
+    */
+}
+/*
+.page-header {
+    background: linear-gradient(
+        -45deg,
+        rgba(197, 16, 33, 1) 0%,
+        #e73c7e,
+        rgba(139, 157, 253, 1) 67%,
+        rgba(139, 157, 253, 1) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradient 14s ease infinite;
+}
+*/
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
+    color: #bf1f37;
+}
+h2.project-tagline a {
+    color: whitesmoke;
+    animation: color 14s ease infinite;
+    font-weight: 800;
+}
+#content > ul > li {
+    margin: 20px 0 !important;
+}
+#content img {
+    margin: 20px 0 !important;
+}
+.page-header img {
+    margin: 30px auto;
+    display: block;
+    width: 80px;
+}
+.project-tagline {
+    opacity: 1;
+    // max-width: 600px;
+    margin: 2px 5vw 2rem 5vw;
+}

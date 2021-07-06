@@ -1,0 +1,6 @@
+title: ISI Bot Documentation
+description: This bot gives the opportunity to request and filter the information from the TU Berlin's ISIS forums according to personal demands.
+show_downloads: true
+google_analytics:
+theme: jekyll-theme-cayman
+github: [metadata]
