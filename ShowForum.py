@@ -155,7 +155,7 @@ class ShowForum(commands.Cog):
                 course = args[0]
                 forum = args[1]
 
-                if not course.isnumeric() or forum.isnumeric():
+                if not course.isnumeric() or not forum.isnumeric():
                     raise ValueError(
                         "You provided at least one wrong input. Please provide two Integer as an input.")
 
@@ -192,7 +192,7 @@ class ShowForum(commands.Cog):
                 course = args[0]
                 forum = args[1]
 
-                if not course.isnumeric() or forum.isnumeric():
+                if not course.isnumeric() or not forum.isnumeric():
                     raise ValueError(
                         "You provided at least one wrong input. Please provide two Integer as an input.")
 

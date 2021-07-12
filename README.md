@@ -20,6 +20,7 @@ Host the Bot yourself, here’s how:
 -   **Create your own discord Bot in the [Discord developer portal](https://discord.com/developers/docs/intro)**
     -   Click on applications and create a new app
     -   In the Application settings, click on Bot and add a new one
+        ![ ](/assets/img/discord-new-app.png)
     -   Feel free to customize the name and icon of your bot
 -   **Invite the Bot to your server and copy your OAuth2 Token**
     -   Click on applications and create a new app
@@ -30,7 +31,8 @@ Host the Bot yourself, here’s how:
 -   **Insert your token in the TOKEN string of the config.py file that’s in your cloned repository**
     -   You can edit the file via your text editor of choice, simply paste the token in between the quotation marks in the first line
 -   **Add personal security key from ISIS to config.py**
-    -   Go to your ISIS module you want to sync with the bot and press the RSS icon to open the rss idml file - In the Application settings, click on Bot and add a new one
+    -   Go to your ISIS module you want to sync with the bot and press the RSS icon to open the rss idml file - In the Application settings, click on Bot and add a new one  
+        ![ ](/assets/img/isis-rss-feed.png)
     -   The feed .idml file opens with an url that looks like follows:  
          *https://isis.tu-berlin.de/rss/file.php/course_id/**personal_key**/mod_forum/forum_id/rss.xml*
     -   Copy your personal key which is the long number and character string from the URL  

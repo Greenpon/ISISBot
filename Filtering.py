@@ -16,6 +16,7 @@ def getUsers():
     return user
 
 # Create a whitelist
+# !!ATTENTION IT IS NOT IN USE, THERE WILL BE WHITELISTS BUT YOU ARE UNABLE TO ADD OR REMOVE SOMETHING!!
 wlist = []
 def getWhitelist():
     return wlist
@@ -43,6 +44,12 @@ class Filtering(commands.Cog):
         # reacts to !add_w 'Test' and adds Test to the whitelist
         # checks if the user already has a whitelist
         # Author: Sven
+        """ 
+        The idea of the whitelist was to use it to filter for the courses from the feed in the case we get the whole ISIS-RSS-Feed.
+        Because of privacy reasons we dont get the whole feed. We still want to let the code inside if something changes in the futrue!
+        The Whitelist ist not implemented in the Listen function this has to be done if it is enabled! 
+        
+        
         @client.command()
         async def add_w(ctx, message):
             if ctx.channel.id in channel_id:
@@ -120,6 +127,7 @@ class Filtering(commands.Cog):
                                       icon_url="https://i.imgur.com/s8Ni2X1.png")
 
                 await ctx.author.send(embed=notstarted)
+        """
 
         # Add Function for blacklists
         # reacts to !add_b 'Test' and adds Test to the blacklist
@@ -295,18 +303,22 @@ class Filtering(commands.Cog):
         # Checks which command is used
         # Checks if the user already has Filterlisten
         # Author: Sven
-        @client.command(aliases=["show_w", "show_b", "show_k"])
+        @client.command(aliases=["show_b", "show_k"]) #show_w removed from aliases
         async def show(ctx):
             if ctx.channel.id in channel_id:
                 if ctx.author.id in pairs:
                     current = discord.Embed(title="Filter Lists", color=0x990000)
                     current.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
 
+                    """ Not used since Whitelist ist not implemented!
                     if ctx.invoked_with.lower() == "show_w":
                         current.add_field(name="Your Whitelist currently contains:",
                                           value=wlist[pairs.get(ctx.author.id)],
                                           inline=False)
-                    elif ctx.invoked_with.lower() == "show_b":
+                                          
+                    When used change next if to elif!
+                    """
+                    if ctx.invoked_with.lower() == "show_b":
                         current.add_field(name="Your Blacklist currently contains:",
                                           value=blist[pairs.get(ctx.author.id)],
                                           inline=False)
@@ -315,9 +327,11 @@ class Filtering(commands.Cog):
                                           value=klist[pairs.get(ctx.author.id)],
                                           inline=False)
                     else:
+                        """ Not used since Whitelist ist not implemented!
                         current.add_field(name="Your Whitelist currently contains:",
                                           value=wlist[pairs.get(ctx.author.id)],
                                           inline=False)
+                        """
                         current.add_field(name="Your Blacklist currently contains:",
                                           value=blist[pairs.get(ctx.author.id)],
                                           inline=False)
@@ -381,7 +395,7 @@ class Filtering(commands.Cog):
         async def create(id):
             author = await client.fetch_user(id)
             if id not in pairs:
-                pairs[id] = len(wlist)
+                pairs[id] = len(klist)
                 user.append(id)
 
                 wlist.append([])
