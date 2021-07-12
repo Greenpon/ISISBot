@@ -13,7 +13,7 @@ class CommandHelp(commands.Cog):
         @client.command(aliases=["help", "command", "commands"])
         async def helpme(ctx):
             if ctx.channel.name == "bot-test":
-                hilfe = discord.Embed(title="commands", color=0x990000)
+                hilfe = discord.Embed(title="Commands", color=0x990000)
                 hilfe.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
                 hilfe.add_field(name="!start", value="- starts the bot \n - asks security question \n - creates filter lists", inline=False)
                 hilfe.add_field(name="!new_feed", value="adds a new feed that the bot will listen to\n(e.g. !new_feed <Course ID> <Forum ID>) \n see Documentation for infos on where to find these IDs.", inline=False)

@@ -34,14 +34,14 @@ async def on_command_error(ctx, error):
 
             errormsg = discord.Embed(title="", color=0x990000)
             errormsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-            errormsg.add_field(name="Achtung!", value="Diesen Befehl kenne ich nicht. \nSchau dir meine Befehle mit !help an.", inline=False)
+            errormsg.add_field(name="Attention!", value="I do not know this command. \nPlease look at the commands i know with !help.", inline=False)
             errormsg.set_footer(text="ISIS Bot v0.1 • " + get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
             await ctx.send(embed=errormsg)
     else:
         errormsg = discord.Embed(title="", color=0x990000)
         errormsg.set_thumbnail(url="https://i.imgur.com/TBr8R7L.png")
-        errormsg.add_field(name="Achtung!",
+        errormsg.add_field(name="Attention!",
                            value="I am not started yet. Start me with !start.", inline=False)
         errormsg.set_footer(text="ISIS Bot v0.1 • " + get_date(), icon_url="https://i.imgur.com/s8Ni2X1.png")
 
