@@ -91,57 +91,48 @@ Isi also has an **integrated filtering function** that you can use to only recei
 
 ### **General Commands**
 
-| Command        | Function                                                        | Code Location  |
-| -------------- | --------------------------------------------------------------- | -------------- |
-| `!start`       | starts the bot on the channel you use it on, displays a data    | `bot.py`       |
-|                | security question which you have to answer to by using the      |                |
-|                | emoji reactions. <br>                                           |                |
-|                | If you agree to the data security guidelines by reacting with   |                |
-|                | the green checkmark, the bot Isi will create filter lists       |                |
-|                | as explained above and start listening to your ISIS feeds.      |                |
-|                | If Isi detects a new entry, it will display said entry in       |                |
-|                | your discord channel.                                           |                |
-| -------------  | --------------------------------------------------------------- | -------------  |
-| `!new_feed`    | adds a new feed that the bot will listen to.                    | `ShowForum.py` |
-|                | (e.g. !new_feed <Course ID> <ForumID>)                          |                |
-| -------------  | --------------------------------------------------------------- | -------------  |
-| `!remove_feed` | removes feed, called just like the !new_feed command            | `ShowForum.py` |
-| -------------  | --------------------------------------------------------------- | -------------  |
-| `!help`        | lists all commands on discord with a short explana- tion        | `....obj`      |
-|                | about their usage                                               |                |
-|                |                                                                 |                |
+| Command        | Function                                                                                                                                                                                                                                                           | Code Location    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| `!start`       | starts the bot on the channel you use it on, displays a data security question which you have to answer to by using the emoji reactions. <br><br>                                                                                                                  | `bot.py`         |
+|                | If you agree to the data security guidelines by reacting with the green checkmark, the bot Isi will create filter lists as explained above and start listening to your ISIS feeds. If Isi detects a new entry, it will display said entry in your discord channel. |                  |
+|                |                                                                                                                                                                                                                                                                    |                  |
+| -------------  | ---------------------------------------------------------------                                                                                                                                                                                                    | -------------    |
+| `!new_feed`    | adds a new feed that the bot will listen to. (e.g. !new_feed <Course ID> <ForumID>)                                                                                                                                                                                | `ShowForum.py`   |
+|                |                                                                                                                                                                                                                                                                    |                  |
+| -------------  | ---------------------------------------------------------------                                                                                                                                                                                                    | -------------    |
+| `!remove_feed` | removes feed, called just like the !new_feed command                                                                                                                                                                                                               | `ShowForum.py`   |
+|                |                                                                                                                                                                                                                                                                    |                  |
+| -------------  | ---------------------------------------------------------------                                                                                                                                                                                                    | -------------    |
+| `!help`        | lists all commands on discord with a short explanation about their usage                                                                                                                                                                                           | `CommandHelp.py` |
+|                |                                                                                                                                                                                                                                                                    |                  |
 
 ### **Filtering Commands**
 
-| Command       | Function                                                        | Code Location  |
-| ------------- | --------------------------------------------------------------- | -------------- |
-| `!add_b ` /   | adds or removes given entry to/from blacklist                   | `filtering.py` |
-| `!remove_b `  |                                                                 |                |
-|               |                                                                 |                |
-| ------------- | --------------------------------------------------------------- | -------------  |
-| `!add_k ` /   | adds or removes given entry to/from keywordlist                 | `filtering.py` |
-| `!remove_k `  |                                                                 |                |
-|               |                                                                 |                |
-| ------------- | --------------------------------------------------------------- | -------------  |
-| `!show`       | sends the current state of all of your filter lists             |
-|               | to your personal chat                                           | `ShowForum.py` |
-| ------------- | --------------------------------------------------------------- | -------------  |
+| Command       | Function                                                                  | Code Location  |
+| ------------- | ------------------------------------------------------------------------- | -------------- |
+| `!add_b ` /   | adds or removes given entry to/from blacklist                             | `filtering.py` |
+| `!remove_b `  |                                                                           |                |
+|               |                                                                           |                |
+| ------------- | ---------------------------------------------------------------           | -------------  |
+| `!add_k ` /   | adds or removes given entry to/from keywordlist                           | `filtering.py` |
+| `!remove_k `  |                                                                           |                |
+|               |                                                                           |                |
+| ------------- | ---------------------------------------------------------------           | -------------  |
+| `!show`       | sends the current state of all of your filter lists to your personal chat | `ShowForum.py` |
+|               |                                                                           |                |
+| ------------- | ---------------------------------------------------------------           | -------------  |
 
 ### **Commands only the owner can use**
 
-| Command           | Function                                                         | Code Location     |
-| ----------------- | ---------------------------------------------------------------- | ----------------- |
-| `set_interval_to` | followed by a number and a unit (h, min, sec), you can adjust    | `ShowForum.py.py` |
-|                   | the frequency the bot checks for new forum entries               |                   |
-|                   | (e.g. !set_interval_to 30 min).                                  |                   |
-|                   | If you set the inter- val to high, you might not get all new     |                   |
-|                   | notifications because Isi is limited to only receive the         |                   |
-|                   | latest 10 notifications                                          |                   |
-| -------------     | ---------------------------------------------------------------- | -------------     |
-| `!shutdown`       | shuts down the bot \*                                            | `bot.py`          |
-|                   |                                                                  |                   |
-|                   |                                                                  |                   |
-| -------------     | ---------------------------------------------------------------- | -------------     |
+| Command           | Function                                                                                                                                         | Code Location     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| `set_interval_to` | followed by a number and a unit (h, min, sec), you can adjust the frequency the bot checks for new forum entries (e.g. !set_interval_to 30 min). | `ShowForum.py.py` |
+|                   | If you set the inter- val to high, you might not get all new notifications because Isi is limited to only receive the latest 10 notifications.   |                   |
+|                   |                                                                                                                                                  |                   |
+| -------------     | ----------------------------------------------------------------                                                                                 | -------------     |
+| `!shutdown`       | shuts down the bot \*                                                                                                                            | `bot.py`          |
+|                   |                                                                                                                                                  |                   |
+| -------------     | ----------------------------------------------------------------                                                                                 | -------------     |
 
 \* Note, that if you are not running the bot on a Linux machine, the `!shutdown` command will might throw an error due to a conflict which is caused by windows, python and possible other software. If you want to know more about this, check out [this link](https://github.com/aio-libs/aiohttp/issues/4324).
 

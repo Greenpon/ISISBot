@@ -2,131 +2,151 @@
 
 Python based Dicord bot for ISIS Service TU Berlin
 
-Changelog 06-07 Anna
-- added Bot_Id to config.py
+## **Introduction**
 
-Changelog 06-07 Anna
-- added config template with placeholders for discord app token and ISIS security key
+This project is targeted to the students of the TU Berlin and will allow students to access ISIS forum information and notifications via Discord, a VoIP, instant messaging and digital distribution platform designed for creating communities. Isi is written in the programming language python, which accesses the messages of the ISIS forum via the RSS feed and makes them available to the students.
 
-Changelog 04-07 Lennart
-- added newest commands to !help function
+The bot can be operated individually and as well a prototype for one ISIS module is provided via a Discord server for students to try and share. A hardware server running on a raspberry pi is deployed on which the Discord bot runs and continuously queries new information from the ISIS forum feeds. Due to privacy regulations of the TU Berlin, students will only be able to use the bot with their own ISIS security key, as an external aggregation of the notification from ISIS is not possible. The following chapters describe how to configure and use Isi.
 
-Changelog 03-07 Sven
-- Added Error messages and notes if the bot is not started yet.
+## **How to configure the bot**
 
-Changelog 01-07
-- doubled delete-after times for new_feed, remove_feed and set_interval_to warning messages
-  so the User has a little more time to read through the information being asked
-- corrected typo in data security
+### **Method 1**
 
-Changelog 27-06 Lennart
-- redid the dates in all embed footers and the if condition in listen function
-- cleaned up some embed texts
-- deleted some imports in some files for less clutter
+Host the Bot yourself, here’s how:
 
-Changelog 25-06 Sven
-- Added Key,Value Pairs to Add feeds
-- Added the possibility to remove feeds
-- Implemented an auto start up for the listen after atleast one feed is added
-- Checking if at least one feed is added while listening
-- update rss.py to get all the Feeds, which were added
-- WIP
-  - Testing and bug fixing
+-   **[Clone the Github repository](https://github.com/Greenpon/ISISBot/) onto the machine you want to run the Bot on**
+    -   Click on the code button on the top-right and clone the files with the given command or simply download the [.zip](https://github.com/Greenpon/ISISBot/archive/refs/heads/main.zip)
+    -   Move the folder to the path you want your Bot to run in
+-   **Create your own discord Bot in the [Discord developer portal](https://discord.com/developers/docs/intro)**
+    -   Click on applications and create a new app
+    -   In the Application settings, click on Bot and add a new one
+    -   Feel free to customize the name and icon of your bot
+-   **Invite the Bot to your server and copy your OAuth2 Token**
+    -   Click on applications and create a new app
+    -   In the Application settings, click on OAuth2 tab and tick the "bot" scope under the URL generator
+    -   Tick all the boxes with the rights you want your Bot to have (all Textpermissions are required), if you have administrative rights on the server you want to add the bot to, simply tick the the "administrator" box
+    -   Finally copy the now generated invite link in the scopes section and paste it into your browser’s address bar to make it join a server
+    -   Go back to the Bot tab and copy your token
+-   **Insert your token in the TOKEN string of the config.py file that’s in your cloned repository**
+    -   You can edit the file via your text editor of choice, simply paste the token in between the quotation marks in the first line
+-   **Add personal security key from ISIS to config.py**
+    -   Go to your ISIS module you want to sync with the bot and press the RSS icon to open the rss idml file - In the Application settings, click on Bot and add a new one
+    -   The feed .idml file opens with an url that looks like follows:  
+         *https://isis.tu-berlin.de/rss/file.php/course_id/**personal_key**/mod_forum/forum_id/rss.xml*
+    -   Copy your personal key which is the long number and character string from the URL  
+        and paste them to the field "key" in `config.py`
+    -   Copy your personal key which is the long number and character string from the URL
+        and paste them to the field "key" in `config.py`
+    -   Alternatively log into ISIS and click on your name in the upper right corner, then go to "Einstellungen" →"Sicherheitsschlüssel" and copy your security key from here and paste it as described above
+    -   Add your ISIS modules as described in the commands
+-   **Run the bot.py file usings [Python 3.5](https://www.python.org/downloads/) or higher**
+    -   If you haven’t already, install [Python](https://www.python.org/downloads/) for your operating system of choice
+    -   Run the bot via your method of choice depending on your operating system, you
+        should get a little confirmation that the Bot is running
+    -   You can now start using the commands in the specified channel of your server
 
-Changelog 25-06 Lennart
-- changed Filtering.py dialog output text to english without !create request.
-- changed !help function embed to disappear after 30 seconds as to not clutter the discord channel.
-- renamed missed occurances of Befehle which has been renamed to CommandHelp in last push on 24-06-21.
-- changed all occurances of dates (mostly in footers) to show current date dynamically
+### **Method 2**
 
-Changelog 24-06 Lennart
-- added warning for set_interval_to() if the interval length is very long (RSS Feed 10 entries limit)
-- updated help() with all entries that can be found in documentation currently
-- changed Befehle.py to CommandHelp.py  
+Host your bot remotely on a Raspberry Pi or other linux machine:
 
-Changelog 23-06 Lennart
-- added !set_interval_to function
-- only for bot owner
-- changes the interval in which the bot checks for new forum posts
-- WIP
-  - some kind of message that with a greater interval,
-    the bot might not get all new messages (RSS Feed 10 entries limit)
+-   **Setup your Pi with a linux distro of your choice and connect it to the internet**
+    -   Required dependencies: Python 3.5 or higher, `discord.py`, feedparser
+    -   If not already in your distro included you will need git to clone the repository
+-   **Follow the steps of Method 2 above**
+-   **Create a .sh file for cronjob:**
+    ```bash
+    #!/bin/bash
+    echo "Pulling and restarting the Bot..."
+    pkill -f /path/to/ISISBot/bot.py cd /path/to/ISISBot
+    git pull
+    sleep 10
+    python3 bot.py
+    ```
+-   **To update and restart the bot we will use crontab. To add a cronjob use this command:**
+    ```bash
+     crontab -e
+    ```
+-   **and add the line:**
+    ```bash
+     *30 * * * * /path/to/yourBashFile.sh
+    ```
 
-Changelog 18-06 Lennart
-- deleted code for !notif functionality
+### **Method 3**
 
-Changelog 17-06 Anna   
-- Final text for data security modal that shows up after the bot got started
+We made a prototype that queries the RSS feed of an ISIS module which was created specifically for testing purposes. You can add this prototype to your discord server and try the bot out. Follow [this link](https://discord.com/oauth2/authorize?client_id=856806725982486558&permissions=4294967287&scope=bot), choose the server you want the bot to join and confirm the permissions.
 
-Changelog 15-06 Sven
-- Fixed the ID checking for the Reactions
-- implemented an on_message-function which automatically deletes user commands to keep the channel clean
-- Changed the functions in Filtering to be sent to the user than sent to the channel
-- Some editing of the text
-- minor bug fixes
+## **Commands for using Isi in Discord**
 
-Changelog 12-06 Sven
-- Added a startup command which automatically triggers the Datenschutz
-- Modified the Datenschutz
-- Added a check for Reactions in Filtering.py
-- Added Reaction based Filterlists creation
-  - Still WIP (maybe need to change the ID which it checks)
-- Still to do:
-  - Check the embed texts in Filtering.py and maybe change them
-  - automatically start the listen function if atleast one user accepts the Datenschutz
-  - automatically check if still one user accepts the Datenschutz else not listen anymore
-  - Small changes to the checking of the reactions in Filtering.py (ID-based stuff)
+The following table lists all the commands that you can currently run on Isi. The commands are triggered using a "!" followed by the command you want to run (e.g. `!help`). Sometimes a command can react to different words that also fit it’s function (aliases e.g. `!help` or !helpme) but is is recommended to use the main commands listed below.
 
-Changelog 05-06 Sven & Lennart
-- Optimized rss.py
-- Outsourced the lists and key-value pairs from Filtering.py to access them from ShowForum.py
-- Implemented **listen** in ShowForum.py
-  - Implemented working blacklist
-  - Implemented working keywords
-  - Added a Notification for each user who uses the bot
+After starting the bot, adding your courses is as easy as:  
+`!new_feed <Course ID> <Forum ID>`
 
-Changelog 03-06 Lennart
-- changed forum_output to store key value pairs instead of arrays 
-- updated comments in ShowForum
+To find the IDs for each of your courses, look for the courses forums and you will
+find the RSS-Icon at the top of the forum’s page or right behind the newest forum
+entries. You will find the information at these highlighted locations in the URL of the RSS Feed:  
+*https://isis.tu-berlin.de/rss/file.php/**course_id**/personal_key/mod_forum/**forum_id**/rss.xml*
 
-Changelog 31-05 Lennart
-- Added ShowForum.py
-  - still WIP
-  - reads ISIS-Bot Modul Ankündigungs Forum and shows title, author and message in discord server
-- adjusted extensions in bot.py with new ShowForum
+Note, that not all forums have unlocked their RSS feed so you might need to contact the organizers of the module to set them up for you and the rest of the course.
 
-Changelog 28-05 Sven
-- Added an Error handling function in bot.py
-- Changed some output in Filtering.py
-- Imported cofig.py to rss.py
-  - RSS-key can now be stored in config.py
+Isi also has an **integrated filtering function** that you can use to only receive the news you want to see. There is a blacklist and a keywordlist. If a new post in the forum contains words from your blacklist, Isi won’t show that post to you. If it contains words that are saved in your keyword list, it will highlight them so they stick out in your chat (e.g. put the word "Klausur" in your keyword list and you should get most of the information concerning the upcoming exams highlighted). Appending or removing words to/from these lists is done by using the commands shown in the table, followed by the word you want to filter. After doing so, Isi will give you an overview of all the words that are in your list by sending it to you in a private message.
 
-Changelog 26-05 Sven
-- Added keywords
-- Changed the Show command
-- Added aliases for
-  - Befehle.py helpme
-  - Filtering.py show
-- Commenting in Befehle.py and Filtering.py
+### **General Commands**
 
+| Command        | Function                                                        | Code Location  |
+| -------------- | --------------------------------------------------------------- | -------------- |
+| `!start`       | starts the bot on the channel you use it on, displays a data    | `bot.py`       |
+|                | security question which you have to answer to by using the      |                |
+|                | emoji reactions. <br>                                           |                |
+|                | If you agree to the data security guidelines by reacting with   |                |
+|                | the green checkmark, the bot Isi will create filter lists       |                |
+|                | as explained above and start listening to your ISIS feeds.      |                |
+|                | If Isi detects a new entry, it will display said entry in       |                |
+|                | your discord channel.                                           |                |
+| -------------  | --------------------------------------------------------------- | -------------  |
+| `!new_feed`    | adds a new feed that the bot will listen to.                    | `ShowForum.py` |
+|                | (e.g. !new_feed <Course ID> <ForumID>)                          |                |
+| -------------  | --------------------------------------------------------------- | -------------  |
+| `!remove_feed` | removes feed, called just like the !new_feed command            | `ShowForum.py` |
+| -------------  | --------------------------------------------------------------- | -------------  |
+| `!help`        | lists all commands on discord with a short explana- tion        | `....obj`      |
+|                | about their usage                                               |                |
+|                |                                                                 |                |
 
-Changelog 22-05 Sven
-- Fixed shutdown in bot.py finally (it just takes a few seconds)
-- Fixed Filtering.py:
-    - Added Key/Value pairs
-    - Error exceptions
-    - Case handling
-    - Whitelisting and Blacklisting works now.
-- Added some comments to the code
+### **Filtering Commands**
 
+| Command       | Function                                                        | Code Location  |
+| ------------- | --------------------------------------------------------------- | -------------- |
+| `!add_b ` /   | adds or removes given entry to/from blacklist                   | `filtering.py` |
+| `!remove_b `  |                                                                 |                |
+|               |                                                                 |                |
+| ------------- | --------------------------------------------------------------- | -------------  |
+| `!add_k ` /   | adds or removes given entry to/from keywordlist                 | `filtering.py` |
+| `!remove_k `  |                                                                 |                |
+|               |                                                                 |                |
+| ------------- | --------------------------------------------------------------- | -------------  |
+| `!show`       | sends the current state of all of your filter lists             |
+|               | to your personal chat                                           | `ShowForum.py` |
+| ------------- | --------------------------------------------------------------- | -------------  |
 
-Changelog 21-05 Sven
-- Fixed shutdown in bot.py
-- Added extensions to bot.py
-- Added Befehle.py with a helpme function (to show all possible commands later on)
-    - This is still WIP (need to add the functions with a short description)
-- Added Filtering.py for Black- and Whitelisting
-    - This is still WIP and not tested jet (will test on 22-05)
-    - Maybe the creation of lists should be changed (discord ids are 18 digits...) maybe with key/value pairs
-- Added some comments to the code  
+### **Commands only the owner can use**
 
+| Command           | Function                                                         | Code Location     |
+| ----------------- | ---------------------------------------------------------------- | ----------------- |
+| `set_interval_to` | followed by a number and a unit (h, min, sec), you can adjust    | `ShowForum.py.py` |
+|                   | the frequency the bot checks for new forum entries               |                   |
+|                   | (e.g. !set_interval_to 30 min).                                  |                   |
+|                   | If you set the inter- val to high, you might not get all new     |                   |
+|                   | notifications because Isi is limited to only receive the         |                   |
+|                   | latest 10 notifications                                          |                   |
+| -------------     | ---------------------------------------------------------------- | -------------     |
+| `!shutdown`       | shuts down the bot \*                                            | `bot.py`          |
+|                   |                                                                  |                   |
+|                   |                                                                  |                   |
+| -------------     | ---------------------------------------------------------------- | -------------     |
+
+\* Note, that if you are not running the bot on a Linux machine, the `!shutdown` command will might throw an error due to a conflict which is caused by windows, python and possible other software. If you want to know more about this, check out [this link](https://github.com/aio-libs/aiohttp/issues/4324).
+
+## **Datasecurity**
+
+This application was created for research purpose and is not officially utilized by the TU Berlin. Personal data, such as full names that are published in ISIS forums will be obtained and processed from ISIS in Discord. Users are obliged to use the bot only on Discord servers subscribed by fellow students that are related to the ISIS module you configure it for. Please do not use this bot on Discord servers where you can not guarantee that the personal data of your fellow students is safe from misuse. For more information about TU Berlin data security have a look at [https://www.tu-berlin.de/allgemeine-seiten/datenschutz/](https://www.tu-berlin.de/allgemeine-seiten/datenschutz/).

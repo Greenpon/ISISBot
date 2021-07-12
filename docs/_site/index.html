@@ -62,8 +62,8 @@
     
     
     <p>Or download from github:</p>
-    <a href="" class="btn">Download .zip</a>
-    <a href="" class="btn">Download .tar.gz</a>
+    <a href="https://github.com/Greenpon/ISISBot/archive/refs/heads/main.zip" class="btn">Download .zip</a>
+    <a href="https://github.com/Greenpon/ISISBot/archive/refs/heads/main.tar.gz" class="btn">Download .tar.gz</a>
     
   </header>
 
@@ -197,54 +197,29 @@ entries. You will find the information at these highlighted locations in the URL
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">!start</code></td>
-      <td>starts the bot on the channel you use it on, displays a data</td>
+      <td>starts the bot on the channel you use it on, displays a data security question which you have to answer to by using the emoji reactions. <br /><br /></td>
       <td><code class="language-plaintext highlighter-rouge">bot.py</code></td>
     </tr>
     <tr>
       <td> </td>
-      <td>security question which you have to answer to by using the</td>
+      <td>If you agree to the data security guidelines by reacting with the green checkmark, the bot Isi will create filter lists as explained above and start listening to your ISIS feeds. If Isi detects a new entry, it will display said entry in your discord channel.</td>
       <td> </td>
     </tr>
     <tr>
       <td> </td>
-      <td>emoji reactions. <br /></td>
       <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>If you agree to the data security guidelines by reacting with</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>the green checkmark, the bot Isi will create filter lists</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>as explained above and start listening to your ISIS feeds.</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>If Isi detects a new entry, it will display said entry in</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>your discord channel.</td>
       <td> </td>
     </tr>
   </tbody>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">!new_feed</code></td>
-      <td>adds a new feed that the bot will listen to.</td>
+      <td>adds a new feed that the bot will listen to. (e.g. !new_feed <Course ID=""> <ForumID>)</ForumID></Course></td>
       <td><code class="language-plaintext highlighter-rouge">ShowForum.py</code></td>
     </tr>
     <tr>
       <td> </td>
-      <td>(e.g. !new_feed <Course ID=""> <ForumID>)</ForumID></Course></td>
+      <td> </td>
       <td> </td>
     </tr>
   </tbody>
@@ -254,17 +229,17 @@ entries. You will find the information at these highlighted locations in the URL
       <td>removes feed, called just like the !new_feed command</td>
       <td><code class="language-plaintext highlighter-rouge">ShowForum.py</code></td>
     </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">!help</code></td>
-      <td>lists all commands on discord with a short explana- tion</td>
-      <td><code class="language-plaintext highlighter-rouge">....obj</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>about their usage</td>
-      <td> </td>
+      <td>lists all commands on discord with a short explanation about their usage</td>
+      <td><code class="language-plaintext highlighter-rouge">CommandHelp.py</code></td>
     </tr>
     <tr>
       <td> </td>
@@ -321,13 +296,13 @@ entries. You will find the information at these highlighted locations in the URL
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">!show</code></td>
-      <td>sends the current state of all of your filter lists</td>
-      <td> </td>
+      <td>sends the current state of all of your filter lists to your personal chat</td>
+      <td><code class="language-plaintext highlighter-rouge">ShowForum.py</code></td>
     </tr>
     <tr>
       <td> </td>
-      <td>to your personal chat</td>
-      <td><code class="language-plaintext highlighter-rouge">ShowForum.py</code></td>
+      <td> </td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -345,32 +320,17 @@ entries. You will find the information at these highlighted locations in the URL
   <tbody>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">set_interval_to</code></td>
-      <td>followed by a number and a unit (h, min, sec), you can adjust</td>
+      <td>followed by a number and a unit (h, min, sec), you can adjust the frequency the bot checks for new forum entries (e.g. !set_interval_to 30 min).</td>
       <td><code class="language-plaintext highlighter-rouge">ShowForum.py.py</code></td>
     </tr>
     <tr>
       <td> </td>
-      <td>the frequency the bot checks for new forum entries</td>
+      <td>If you set the inter- val to high, you might not get all new notifications because Isi is limited to only receive the latest 10 notifications.</td>
       <td> </td>
     </tr>
     <tr>
       <td> </td>
-      <td>(e.g. !set_interval_to 30 min).</td>
       <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>If you set the inter- val to high, you might not get all new</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>notifications because Isi is limited to only receive the</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>latest 10 notifications</td>
       <td> </td>
     </tr>
   </tbody>
@@ -379,11 +339,6 @@ entries. You will find the information at these highlighted locations in the URL
       <td><code class="language-plaintext highlighter-rouge">!shutdown</code></td>
       <td>shuts down the bot *</td>
       <td><code class="language-plaintext highlighter-rouge">bot.py</code></td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td> </td>
