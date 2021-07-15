@@ -51,23 +51,6 @@ Host your bot remotely on a Raspberry Pi or other linux machine:
     -   Required dependencies: Python 3.5 or higher, `discord.py`, feedparser
     -   If not already in your distro included you will need git to clone the repository
 -   **Follow the steps of Method 2 above**
--   **Create a .sh file for cronjob:**
-    ```bash
-    #!/bin/bash
-    echo "Pulling and restarting the Bot..."
-    pkill -f /path/to/ISISBot/bot.py cd /path/to/ISISBot
-    git pull
-    sleep 10
-    python3 bot.py
-    ```
--   **To update and restart the bot we will use crontab. To add a cronjob use this command:**
-    ```bash
-     crontab -e
-    ```
--   **and add the line:**
-    ```bash
-     *30 * * * * /path/to/yourBashFile.sh
-    ```
 
 ### **Method 3**
 

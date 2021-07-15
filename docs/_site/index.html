@@ -145,23 +145,6 @@ should get a little confirmation that the Bot is running</li>
     </ul>
   </li>
   <li><strong>Follow the steps of Method 2 above</strong></li>
-  <li><strong>Create a .sh file for cronjob:</strong>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="nb">echo</span> <span class="s2">"Pulling and restarting the Bot..."</span>
-pkill <span class="nt">-f</span> /path/to/ISISBot/bot.py <span class="nb">cd</span> /path/to/ISISBot
-git pull
-<span class="nb">sleep </span>10
-python3 bot.py
-</code></pre></div>    </div>
-  </li>
-  <li><strong>To update and restart the bot we will use crontab. To add a cronjob use this command:</strong>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> crontab <span class="nt">-e</span>
-</code></pre></div>    </div>
-  </li>
-  <li><strong>and add the line:</strong>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">*</span>30 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /path/to/yourBashFile.sh
-</code></pre></div>    </div>
-  </li>
 </ul>
 
 <h3 id="method-3"><strong>Method 3</strong></h3>
